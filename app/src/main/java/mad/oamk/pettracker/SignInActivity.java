@@ -40,11 +40,11 @@ public class SignInActivity extends AppCompatActivity {
 
 
 
-        Button sigingButton = (Button) findViewById(R.id.signing);
+        Button sigingButton = (Button) findViewById(R.id.sign_in_button);
         sigingButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                sigIn();
+                signIn();
             }
         });
 
@@ -52,7 +52,7 @@ public class SignInActivity extends AppCompatActivity {
 
     }
 
-    public void sigIn(){
+    public void signIn(){
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build());
 
@@ -71,7 +71,9 @@ public class SignInActivity extends AppCompatActivity {
             // Successfully signed in
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             // ...
+            //TODO move to main activity
         } else {
+            //TODO
             // Sign in failed. If response is null the user canceled the
             // sign-in flow using the back button. Otherwise check
             // response.getError().getErrorCode() and handle the error.
