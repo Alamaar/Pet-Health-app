@@ -17,7 +17,7 @@ public class SignOut extends AppCompatActivity {
 
 
         Button signOutButton = (Button) findViewById(R.id.sign_out_button);
-        sigingButton.setOnClickListener(new View.OnClickListener(){
+        signOutButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 signOut();
