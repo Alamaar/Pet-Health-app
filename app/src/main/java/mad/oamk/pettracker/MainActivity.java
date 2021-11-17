@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
 
-    private FirebaseUser user;
+    private FirebaseUser user; //TODO  pois pois
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
