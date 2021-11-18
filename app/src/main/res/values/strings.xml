@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">Pet Tracker</string>
+    <string name="app_name">Lemmikkini.fi</string>
+
+    <string-array name="pet_names">
+        <item>Lemmikki1</item>
+        <item>Lemmikki2</item>
+        <item>Lemmikki3</item>
+        <item>Lemmikki4</item>
+        <item>Lemmikki5</item>
+        <item>Lemmikki6</item>
+    </string-array>
 </resources>
