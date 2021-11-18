@@ -71,7 +71,8 @@ public class SignInActivity extends AppCompatActivity {
             // Successfully signed in
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             // ...
-            //TODO move to main activity
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         } else {
             //TODO
             // Sign in failed. If response is null the user canceled the

@@ -34,4 +34,14 @@
             android:background="@drawable/btn_background"
             android:src="@drawable/ic_action_add" />
     </LinearLayout>
+
+
+    <Button
+        android:id="@+id/sign_out_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign out"
+        android:layout_gravity="right"
+        tools:layout_editor_absoluteX="153dp"
+        tools:layout_editor_absoluteY="254dp" />
 </LinearLayout>
