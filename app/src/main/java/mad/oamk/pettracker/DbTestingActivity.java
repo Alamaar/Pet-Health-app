@@ -1,18 +1,24 @@
 package mad.oamk.pettracker;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import mad.oamk.pettracker.models.Pet;
 
@@ -20,7 +26,7 @@ public class DbTestingActivity extends AppCompatActivity {
 
     private FirebaseUser fireuser;
     private TextView user;
-    private TextView pet;
+    private TextView pettextview;
 
     private DatabaseReference mDatabase;
 
@@ -32,7 +38,7 @@ public class DbTestingActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         user = (TextView) findViewById(R.id.user_info);
-        pet = (TextView) findViewById(R.id.Pet_info);
+        pettextview = (TextView) findViewById(R.id.Pet_info);
 
         fireuser = FirebaseAuth.getInstance().getCurrentUser();
         if (fireuser == null) {
@@ -62,13 +68,51 @@ public class DbTestingActivity extends AppCompatActivity {
                 delete();
             }
             });
+
+
+        //listen changes to pet dataset
+        ValueEventListener petListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                StringBuilder info = new StringBuilder(new String());
+
+                for(DataSnapshot child : snapshot.getChildren()){
+                    Pet pet = child.getValue(Pet.class);
+
+                    assert pet != null;
+                    String breed = pet.getBreed();
+                    String name = pet.getName();
+                    String species = pet.getSpecies();
+                    String birthd = pet.getDateOfBirth();
+
+                    info.append("\n\n" + "Name :").append(name).append("\nbreed").append(breed).append("\nspecies").append(species).append("\nbirth day").append(birthd);
+                }
+
+
+
+
+                pettextview.setText(info.toString());
+            }
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+
+        mDatabase.child("Pets").child(fireuser.getUid()).child("Pets").addValueEventListener(petListener);
     }
 
 
 
-    public void add(){
+    public void add(){ //adding new pet
+
         String userID = fireuser.getUid();
         DatabaseReference petsref = mDatabase.child("Pets").child(userID).child("Pets").push();
+        //Pet constructor
         //String name, String dateOfBirth, String species, String breed)
         Pet pet = new Pet("Mustfi", "15-01-2000", "Dog", "Golden Retriever");
         petsref.setValue(pet);
@@ -77,6 +121,24 @@ public class DbTestingActivity extends AppCompatActivity {
 
 
     public void delete(){
+        //DELETES the newest value in pets database
+        DatabaseReference petsref = mDatabase.child("Pets").child(fireuser.getUid()).child("Pets");
+        Query query = petsref.orderByValue().limitToLast(1);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot latestsnap: snapshot.getChildren()){
+                    latestsnap.getRef().removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
 
     }
 
