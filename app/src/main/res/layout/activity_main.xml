@@ -40,8 +40,17 @@
         android:id="@+id/sign_out_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign out"
         android:layout_gravity="right"
+        android:text="Sign out"
+        tools:layout_editor_absoluteX="153dp"
+        tools:layout_editor_absoluteY="254dp" />
+
+    <Button
+        android:id="@+id/test_activity_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test"
+        android:layout_gravity="left"
         tools:layout_editor_absoluteX="153dp"
         tools:layout_editor_absoluteY="254dp" />
 </LinearLayout>
