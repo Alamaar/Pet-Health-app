@@ -13,10 +13,7 @@
             android:name=".DbTestingActivity"
             android:exported="false" />
         <activity
-            android:name=".SignOut"
-            android:exported="false" />
-        <activity
-            android:name=".SignInActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

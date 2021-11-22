@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Arrays;
 import java.util.List;
 
-public class SignInActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
             new FirebaseAuthUIActivityResultContract(),
@@ -31,6 +33,10 @@ public class SignInActivity extends AppCompatActivity {
                 }
             }
     );
+    private FirebaseUser firebaseuser;
+
+    private Button loginButton;
+    private TextView loginTextView;
 
 
     @Override
@@ -38,18 +44,39 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        
+        firebaseuser = FirebaseAuth.getInstance().getCurrentUser();
+
+        loginButton = (Button) findViewById(R.id.login_button);
+        loginTextView = (TextView) findViewById(R.id.login_text_view);
 
 
-        Button sigingButton = (Button) findViewById(R.id.sign_in_button);
-        sigingButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                signIn();
-            }
-        });
+        if (firebaseuser == null) {
+            loginButton.setText("Sign in"); //TODO move to string recourses
+            loginTextView.setText("Sign in");
 
+            loginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    signIn();
+                }
+            });
+        }
+        else {
+            loginButton.setText("Sign out");
 
+            String text = "Signed in as :";
+            String username = firebaseuser.getDisplayName().toString();
+            text = text + username;
 
+            loginTextView.setText(text);
+            loginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    signOut();
+                }
+            });
+        }
     }
 
     public void signIn(){
@@ -74,6 +101,8 @@ public class SignInActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else {
+            Toast toast = Toast.makeText(this, "Sign in failed",Toast.LENGTH_LONG);
+            toast.show();
             //TODO
             // Sign in failed. If response is null the user canceled the
             // sign-in flow using the back button. Otherwise check
@@ -81,4 +110,12 @@ public class SignInActivity extends AppCompatActivity {
             // ...
         }
     }
+
+    public void signOut(){
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
 }
+
+
