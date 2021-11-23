@@ -1,5 +1,8 @@
 package mad.oamk.pettracker.models;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Pet {
 
     private String name;
@@ -7,6 +10,15 @@ public class Pet {
     private String species;
     private String breed;
 
+    private Map<String, Object> Weight = new HashMap();
+
+    public Map<String, Object> getWeight() {
+        return Weight;
+    }
+
+    public void setWeight(Map<String, Object> weight) {
+        Weight = weight;
+    }
 
     public Pet() {
     }
@@ -17,6 +29,8 @@ public class Pet {
         this.species = species;
         this.breed = breed;
     }
+
+
 
 
     public String getName() {

@@ -18,6 +18,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import mad.oamk.pettracker.models.Pet;
 
 public class DbTestingActivity extends AppCompatActivity {
@@ -27,6 +31,8 @@ public class DbTestingActivity extends AppCompatActivity {
     private TextView pettextview;
 
     private DatabaseReference mDatabase;
+
+    private Map<Long, String> keyList = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +63,14 @@ public class DbTestingActivity extends AppCompatActivity {
             }
         });
 
+        Button add_weight = (Button) findViewById(R.id.add_weight);
+        add_weight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addweight();
+            }
+        });
+
 
 
             Button delete_pet = (Button) findViewById(R.id.delete_pet);
@@ -73,16 +87,23 @@ public class DbTestingActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                Long i = 0L;
+
                 StringBuilder info = new StringBuilder(new String());
 
                 for(DataSnapshot child : snapshot.getChildren()){
                     Pet pet = child.getValue(Pet.class);
+                    i++;
 
                     assert pet != null;
+                    String key = child.getKey();
+                    keyList.put( i , key);
                     String breed = pet.getBreed();
                     String name = pet.getName();
                     String species = pet.getSpecies();
                     String birthd = pet.getDateOfBirth();
+
+
 
                     info.append("\n\n" + "Name :").append(name).append("\nbreed").append(breed).append("\nspecies").append(species).append("\nbirth day").append(birthd);
                 }
@@ -102,6 +123,33 @@ public class DbTestingActivity extends AppCompatActivity {
         };
 
         mDatabase.child("Pets").child(fireuser.getUid()).child("Pets").addValueEventListener(petListener);
+
+        TextView txtights = (TextView) findViewById(R.id.weight_info);
+        txtights.setText("test");
+
+        ValueEventListener weightlistener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String weights;
+
+                for(DataSnapshot child : snapshot.getChildren()){
+                    weights = child.getValue().toString();
+
+
+                    txtights.setText(weights);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+
+        mDatabase.child("Pets").child(fireuser.getUid()).child("Pets").child("Weight").addValueEventListener(weightlistener);// mikä lemmikki?? id puuttuu
+
+
+
     }
 
 
@@ -156,6 +204,22 @@ public class DbTestingActivity extends AppCompatActivity {
 
             user.setText(userinfo);
         }
+
+    }
+
+
+    public void addweight(){
+
+        String petId = keyList.get(1L); // id of pet to add the weigtht
+
+        DatabaseReference petsref = mDatabase.child("Pets").child(fireuser.getUid()).child("Pets").child(petId);
+
+        Map<String, Object> weight = new HashMap<>();
+        weight.put("date", "25-02-2020");
+        weight.put("weight", "25");
+
+        DatabaseReference ref = petsref.child("Weight").push();
+        ref.setValue(weight);
 
     }
 }
