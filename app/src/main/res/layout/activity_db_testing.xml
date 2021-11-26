@@ -8,10 +8,11 @@
 
     <TextView
         android:id="@+id/Pet_info"
-        android:layout_width="382dp"
-        android:layout_height="473dp"
+        android:layout_width="392dp"
+        android:layout_height="448dp"
         android:layout_marginTop="24dp"
         android:text=""
+        app:layout_constraintBottom_toTopOf="@+id/add_weight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_info" />
@@ -32,11 +33,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginEnd="115dp"
         android:layout_marginBottom="16dp"
         android:text="ADD"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/delete_pet"
+        app:layout_constraintEnd_toStartOf="@+id/add_weight"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -44,10 +44,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginEnd="4dp"
         android:layout_marginBottom="16dp"
         android:text="DELETE"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/add_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginBottom="16dp"
+        android:text="ADD weight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/delete_pet"
         app:layout_constraintStart_toEndOf="@+id/add_pet" />
 </androidx.constraintlayout.widget.ConstraintLayout>
