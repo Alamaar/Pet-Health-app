@@ -1,22 +1,27 @@
-package mad.oamk.pettracker.models;
+package mad.oamk.pettracker;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import mad.oamk.pettracker.R;
+import mad.oamk.pettracker.models.Pet;
 
 public class PetView extends AppCompatActivity {
 
@@ -33,14 +38,49 @@ public class PetView extends AppCompatActivity {
     private Button btnother;
 
 
-    private DatabaseReference mDatabase;
+    private DatabaseReference petIdRefrence;
+
+    private String petId;
+
+    private FirebaseUser user;
+
+    private Pet pet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_view);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        //Get pet id from intent
+        Intent intent = getIntent();
+        petId = intent.getStringExtra("PetId");
+
+        //Get user
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            // Not signed in, launch the Sign In activity
+            Intent loginIntent = new Intent(this, LoginActivity.class);
+            startActivity(loginIntent);
+        }
+        //Set refrence to pet
+        petIdRefrence = FirebaseDatabase.getInstance().getReference().child("Pets").child(user.getUid()).child("Pets").child(petId);
+
+        // Event lisener to pet id to lissen all changes
+        ValueEventListener petListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                pet = snapshot.getValue(Pet.class);
+
+                setValues();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+
+        petIdRefrence.addValueEventListener(petListener);
 
         nametextview = (TextView) findViewById(R.id.name);
         speciestextview = (TextView) findViewById(R.id.species);
@@ -52,9 +92,11 @@ public class PetView extends AppCompatActivity {
         btnweight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                moveToWeight();
+                //moveToWeight();
             }
         });
+
+
         /*Button btnhealthness = (Button) findViewById(R.id.healthness);
         btnhealthness.setOnClickListener(new OnClickListener() {
             @Override
@@ -92,38 +134,18 @@ public class PetView extends AppCompatActivity {
         });*/
 
 
-        ValueEventListener petListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                StringBuilder info = new StringBuilder(new String());
+    }
 
-                for (DataSnapshot child : snapshot.getChildren()) {
-                    Pet pet = child.getValue(Pet.class);
-
-                    assert pet != null;
-                    String name = pet.getName();
-                    String species = pet.getSpecies();
-                    String breed = pet.getBreed();
-                    String dateOfBirth = pet.getDateOfBirth();
-                    //String tag = pet.getTag();
-
-                    info.append("\n\n" + "Name: ").append(name).append("\nSpecies: ").append(species).append("\nbreed: ")
-                            .append(breed).append("\ndateOfBirth: ").append(dateOfBirth);//.append("\ntag: ").append(tag);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
+    private void setValues() {
+        //Set values
+        nametextview.setText(pet.getName());
+        //TODO loput tiedot
     }
 
     public void moveToWeight() {
-        Intent intent = new Intent(this, WeightActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, WeightActivity.class);
+        //startActivity(intent);
     }
 }
 /*

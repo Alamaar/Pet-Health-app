@@ -109,7 +109,7 @@ public class DbTestingActivity extends AppCompatActivity {
         delete_pet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                delete();
+                //delete();
             }
             });
 
@@ -167,6 +167,7 @@ public class DbTestingActivity extends AppCompatActivity {
         //Pet constructor
         //String name, String dateOfBirth, String species, String breed)
         Pet pet = new Pet("Mustfi", "15-01-2000", "Dog", "Golden Retriever");
+        pet.setPhotoUrl("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg");
         petsref.setValue(pet);
 
     }
