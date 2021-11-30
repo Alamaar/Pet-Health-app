@@ -30,7 +30,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     int image;
     private Context context;
 
-
+    //Array list to contain all pet id's
     private List<String> petIdKeyList = new ArrayList<String>();
 
 
@@ -57,7 +57,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         String petId = petIdKeyList.get(position);
 
-
+        //set click listener on views image and go to petView activity.
         holder.myImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,6 +66,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 String petId = petIdKeyList.get(position);
                 Context context = view.getContext();
                 Intent intent = new Intent(context,PetView.class);
+                //send clickeds pets id to new activity.
                 intent.putExtra("PetId",petId);
                 context.startActivity(intent);
             }

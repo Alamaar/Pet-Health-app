@@ -51,18 +51,18 @@ public class PetView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_view);
 
-        //Get pet id from intent
+        //Get pets id from intent
         Intent intent = getIntent();
         petId = intent.getStringExtra("PetId");
 
-        //Get user
+        //Get curren user from firebase instance
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
             // Not signed in, launch the Sign In activity
             Intent loginIntent = new Intent(this, LoginActivity.class);
             startActivity(loginIntent);
         }
-        //Set refrence to pet
+        //Set refrence to pets id
         petIdRefrence = FirebaseDatabase.getInstance().getReference().child("Pets").child(user.getUid()).child("Pets").child(petId);
 
         // Event lisener to pet id to lissen all changes
@@ -70,8 +70,9 @@ public class PetView extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                //get pet to pet class
                 pet = snapshot.getValue(Pet.class);
-
+                //set values
                 setValues();
             }
             @Override
