@@ -10,6 +10,25 @@ public class Pet {
     private String species;
     private String breed;
 
+    private String photoUrl;
+    private String tagID;
+
+    public String getTagID() {
+        return tagID;
+    }
+
+    public void setTagID(String tagID) {
+        this.tagID = tagID;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
     private Map<String, Object> Weight = new HashMap();
 
     public Map<String, Object> getWeight() {
