@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetTracker">
         <activity
+            android:name=".AddPetActivity"
+            android:exported="false"/>
+        <activity
             android:name=".DbTestingActivity"
             android:exported="false" />
         <activity
