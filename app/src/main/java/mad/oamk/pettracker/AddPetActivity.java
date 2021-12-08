@@ -133,6 +133,8 @@ public class AddPetActivity extends AppCompatActivity {
                             .build();
 
                     StorageReference imageUploadRefrence = storageReference.child("images/"+uri.getLastPathSegment());
+                    //TODO kuvat pitäs erotella jos lemmikin kuvat menee sitten images/lemmikki id / kuvat....jpg...
+                    //Profiilikuvat sitten userId/images alle. tietojen muokkakseen tarvii kuvan vaihtamisen. eli poistamisen ja uudelleen lataaminen.
 
                     UploadTask uploadTask = imageUploadRefrence.putFile(uri);
 
