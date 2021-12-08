@@ -19,21 +19,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.2"
-        android:orientation="vertical">
+
 
         <ImageButton
             android:id="@+id/btnAddPet"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:background="@drawable/btn_background"
             android:src="@drawable/ic_action_add" />
-    </LinearLayout>
+
 
 
     <Button
@@ -42,15 +38,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="Sign out"
-        tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="254dp" />
-
-    <Button
-        android:id="@+id/test_activity_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Test"
-        android:layout_gravity="left"
         tools:layout_editor_absoluteX="153dp"
         tools:layout_editor_absoluteY="254dp" />
 </LinearLayout>

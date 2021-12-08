@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -84,8 +85,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                     Pet pet = task.getResult().getValue(Pet.class);
 
                     String name = pet.getName();
+                    String imageUrl = pet.getPhotoUrl();
                     holder.myText1.setText(name);
-                    //TODO kuva
+                    Glide.with(holder.itemView).load(imageUrl).into(holder.myImage);
 
 
                 }

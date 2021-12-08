@@ -111,14 +111,14 @@ public class MainActivity extends AppCompatActivity {
         });
         //TODO Voidaan poistaa myöhemmässä vaiheessa
         //Test activity button
-        Button testing_activity = (Button) findViewById(R.id.test_activity_button);
-        testing_activity.setOnClickListener(new View.OnClickListener(){
+        //Button testing_activity = (Button) findViewById(R.id.test_activity_button);
+        /*testing_activity.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, DbTestingActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
         // Avataan lemmikinlisäysikkuna:
         ImageButton add_pet_activity = (ImageButton) findViewById(R.id.btnAddPet);
         add_pet_activity.setOnClickListener(new View.OnClickListener(){
