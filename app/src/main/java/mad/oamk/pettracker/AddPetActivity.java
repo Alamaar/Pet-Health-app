@@ -28,6 +28,9 @@ import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import mad.oamk.pettracker.models.Pet;
 
 public class AddPetActivity extends AppCompatActivity {
@@ -40,6 +43,10 @@ public class AddPetActivity extends AppCompatActivity {
     private ImageView imageView;
 
     private String imageUrl;
+
+    private Uri uriimage;
+
+    private DatabaseReference petsReference;
 
 
 
@@ -67,7 +74,12 @@ public class AddPetActivity extends AppCompatActivity {
         add_pet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                add();
+                if(add()){
+                    uploadImage(uriimage);
+
+                    Intent intent = new Intent(AddPetActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -78,10 +90,10 @@ public class AddPetActivity extends AppCompatActivity {
                 addImage();
             }
         });
-
+        //TODO lemmikin lisäämisne jälkeen takaisin pää aktivitettiin ja jos painetaan takas niin poistetaan kuva?
     }
 
-    public void add() { // Adding new pet
+    public boolean add() { // Adding new pet
 
         EditText editText1 = (EditText) findViewById(R.id.txtInput1); // name
         String name = editText1.getText().toString();
@@ -96,20 +108,23 @@ public class AddPetActivity extends AppCompatActivity {
         if(editText1.getText().length() == 0  || editText2.getText().length() == 0 || editText3.getText().length() == 0 || editText4.getText().length() == 0) {
             Toast toast = Toast.makeText(this, "Fill in the required fields.",Toast.LENGTH_LONG);
             toast.show();
+            return false;
         }
+
         // Kun kaikki tiedot on täytetty lisätään lemmikki firebaseen:
         else {
             String userID = fireuser.getUid();
             // Reference eli sijainti
             // .push() luo uuden uniikin avaimen ja palautaa sijainnin sen jälkeen set valuella lyödään lemmikki luokka sinne.
-            DatabaseReference petsref = mDatabase.child("Pets").child(userID).child("Pets").push();
+            petsReference = mDatabase.child("Pets").child(userID).child("Pets").push();
             // Pet constructor
             Pet pet = new Pet(name, date_of_birth, species, breed);
-            pet.setPhotoUrl(imageUrl);
-            petsref.setValue(pet);
+
+            petsReference.setValue(pet);
 
             Toast toast = Toast.makeText(this, "New pet added.",Toast.LENGTH_LONG);
             toast.show();
+            return true;
         }
     }
 
@@ -120,6 +135,39 @@ public class AddPetActivity extends AppCompatActivity {
 
     }
 
+    public void uploadImage(Uri uri){
+        StorageMetadata metadata = new StorageMetadata.Builder()
+                .setContentType("image/jpeg")
+                .build();
+
+        StorageReference imageUploadRefrence = storageReference.child("images/"+uri.getLastPathSegment());
+        //TODO kuvat pitäs erotella jos lemmikin kuvat menee sitten images/lemmikki id / kuvat....jpg...
+        //Profiilikuvat sitten userId/images alle. tietojen muokkakseen tarvii kuvan vaihtamisen. eli poistamisen ja uudelleen lataaminen.
+
+        UploadTask uploadTask = imageUploadRefrence.putFile(uri);
+
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                taskSnapshot.getMetadata().getReference().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+
+                        imageUrl = uri.toString();
+                        Map<String, Object> imageurl = new HashMap<>();
+                        imageurl.put("photoUrl", imageUrl);
+                        petsReference.updateChildren(imageurl);
+
+
+
+                    }
+                });
+            }
+        });
+    }
+
+
+
     ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
             new ActivityResultCallback<Uri>() {
                 @Override
@@ -128,29 +176,13 @@ public class AddPetActivity extends AppCompatActivity {
                     if (uri == null){
                         return;
                     }
-                    StorageMetadata metadata = new StorageMetadata.Builder()
-                            .setContentType("image/jpeg")
-                            .build();
+                    uriimage = uri;
+                    Glide.with(AddPetActivity.this).load(uri).into(imageView);
 
-                    StorageReference imageUploadRefrence = storageReference.child("images/"+uri.getLastPathSegment());
-                    //TODO kuvat pitäs erotella jos lemmikin kuvat menee sitten images/lemmikki id / kuvat....jpg...
-                    //Profiilikuvat sitten userId/images alle. tietojen muokkakseen tarvii kuvan vaihtamisen. eli poistamisen ja uudelleen lataaminen.
-
-                    UploadTask uploadTask = imageUploadRefrence.putFile(uri);
-
-                    uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            taskSnapshot.getMetadata().getReference().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    Glide.with(AddPetActivity.this).load(uri).into(imageView);
-                                    imageUrl = uri.toString();
-                                }
-                            });
-                        }
-                    });
                 }
             });
+
+
+
 
 }
