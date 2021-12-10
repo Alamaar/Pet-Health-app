@@ -74,6 +74,8 @@ public class AddPetActivity extends AppCompatActivity {
 
             Toast toast = Toast.makeText(this, "New pet added.",Toast.LENGTH_LONG);
             toast.show();
+
+            AddPetActivity.this.finish();
         }
     }
 }

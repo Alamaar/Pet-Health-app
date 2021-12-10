@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,6 +21,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import mad.oamk.pettracker.models.Pet;
@@ -46,6 +49,8 @@ public class PetView extends AppCompatActivity {
 
     private Pet pet;
 
+    private ValueEventListener petListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +71,7 @@ public class PetView extends AppCompatActivity {
         petIdRefrence = FirebaseDatabase.getInstance().getReference().child("Pets").child(user.getUid()).child("Pets").child(petId);
 
         // Event lisener to pet id to lissen all changes
-        ValueEventListener petListener = new ValueEventListener() {
+        petListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -134,21 +139,64 @@ public class PetView extends AppCompatActivity {
             }
         });*/
 
+        // Lemmikin poistaminen DELETE napilla:
+        ImageButton delete_pet = (ImageButton) findViewById(R.id.btnDeletePet);
+        delete_pet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                delete(); // Tämä metodi löytyy hieman alempaa...
+            }
+        });
+
+        // Lemmikin tietojen päivitystä varten avataan oma aktiviteetti:
+        ImageButton update_pet = (ImageButton) findViewById(R.id.btnUpdatePet);
+        update_pet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PetView.this, UpdatePetActivity.class);
+                intent.putExtra("PetId",petId);
+                startActivity(intent);
+            }
+        });
 
 
     }
 
     private void setValues() {
-        //Set values
+        //Set values to the textviews:
         nametextview.setText(pet.getName());
-        //TODO loput tiedot
+        speciestextview.setText(pet.getSpecies());
+        breedtextview.setText(pet.getBreed());
+        dateOfBirthtextview.setText(pet.getDateOfBirth());
+
     }
 
     public void moveToWeight() {
         //Intent intent = new Intent(this, WeightActivity.class);
         //startActivity(intent);
     }
+
+    public void delete(){
+        petIdRefrence.removeEventListener(petListener);
+        // Poistaa tietyn lemmikin ID:n perusteella:
+        DatabaseReference petsref = petIdRefrence;
+        petsref.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(PetView.this, "Succesfully deleted.", Toast.LENGTH_SHORT).show();
+                    PetView.this.finish();
+                }
+                else {
+                    Toast.makeText(PetView.this, "Failed.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
+
 }
+
 /*
     public void moveToHealthness() {
         Intent intent = new Intent(this, HealthnessActivity.class);
