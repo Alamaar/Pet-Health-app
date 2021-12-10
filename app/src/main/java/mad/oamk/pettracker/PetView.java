@@ -5,14 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import mad.oamk.pettracker.customdata.CustomDataCreateActivity;
 import mad.oamk.pettracker.models.Pet;
 
 public class PetView extends AppCompatActivity {
@@ -45,6 +43,8 @@ public class PetView extends AppCompatActivity {
     private FirebaseUser user;
 
     private Pet pet;
+
+    //TODO recyclerview nappeja näyttämään.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +75,7 @@ public class PetView extends AppCompatActivity {
                 //set values
                 setValues();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -82,6 +83,7 @@ public class PetView extends AppCompatActivity {
         };
 
         petIdRefrence.addValueEventListener(petListener);
+        petIdRefrence.removeEventListener(petListener);
 
         nametextview = (TextView) findViewById(R.id.name);
         speciestextview = (TextView) findViewById(R.id.species);
@@ -96,6 +98,15 @@ public class PetView extends AppCompatActivity {
                 //moveToWeight();
             }
         });
+
+        Button buttonCustom = (Button) findViewById(R.id.buttonCustom);
+        buttonCustom.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moveToCustom();
+            }
+        });
+
 
 
         /*Button btnhealthness = (Button) findViewById(R.id.healthness);
@@ -135,7 +146,6 @@ public class PetView extends AppCompatActivity {
         });*/
 
 
-
     }
 
     private void setValues() {
@@ -148,7 +158,16 @@ public class PetView extends AppCompatActivity {
         //Intent intent = new Intent(this, WeightActivity.class);
         //startActivity(intent);
     }
+
+    public void moveToCustom() {
+        Intent intentcustom = new Intent(this, CustomDataCreateActivity.class);
+        intentcustom.putExtra("PetId",petId);
+        startActivity(intentcustom);
+    }
+
+
 }
+
 /*
     public void moveToHealthness() {
         Intent intent = new Intent(this, HealthnessActivity.class);

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/itemViewLayout">
+
+    <TextView
+        android:id="@+id/textViewField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_gravity="left"
+         />
+
+    <TextView
+        android:id="@+id/textViewFieldData"
+        android:layout_width="103dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="TextView" />
+
+</LinearLayout>
