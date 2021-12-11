@@ -55,7 +55,7 @@ public class AddPetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_pet);
 
-
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         // Tarkistetaan onko käyttäjä edelleen kirjautunut:
         fireuser = FirebaseAuth.getInstance().getCurrentUser();
@@ -90,7 +90,6 @@ public class AddPetActivity extends AppCompatActivity {
                 addImage();
             }
         });
-        //TODO lemmikin lisäämisne jälkeen takaisin pää aktivitettiin ja jos painetaan takas niin poistetaan kuva?
     }
 
     public boolean add() { // Adding new pet

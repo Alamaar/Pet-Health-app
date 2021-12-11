@@ -19,6 +19,9 @@
             android:name=".customdata.CustomDataCreateActivity"
             android:exported="false" />
         <activity
+            android:name=".UpdatePetActivity"
+            android:exported="false"/>
+        <activity
             android:name=".AddPetActivity"
             android:exported="false" />
         <activity
