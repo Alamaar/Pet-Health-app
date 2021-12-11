@@ -67,8 +67,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 String petId = petIdKeyList.get(position);
                 Context context = view.getContext();
                 Intent intent = new Intent(context,PetView.class);
-                //send clickeds pets id to new activity.
-                intent.putExtra("PetId",petId);
+                //sets pet id to clicked pets id
+                AppData.getInstance().setPetId(petId);
                 context.startActivity(intent);
             }
         });

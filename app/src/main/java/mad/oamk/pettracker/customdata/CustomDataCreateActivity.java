@@ -13,6 +13,7 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.List;
 
+import mad.oamk.pettracker.AppData;
 import mad.oamk.pettracker.R;
 import mad.oamk.pettracker.customdata.adapters.CustomDataCreateAdapter;
 
@@ -26,7 +27,8 @@ public class CustomDataCreateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_data_create);
 
-        petId = getIntent().getStringExtra("PetId");
+        petId = AppData.getInstance().getPetId();
+                //getIntent().getStringExtra("PetId");
 
         customRecyclerView = findViewById(R.id.customDataRecyclerView);
 
@@ -62,9 +64,13 @@ public class CustomDataCreateActivity extends AppCompatActivity {
                 Bundle extra = new Bundle();
                 extra.putStringArrayList("fields", (ArrayList<String>) saveContents);
                 Intent intent = new Intent(CustomDataCreateActivity.this, CustomDataAddActivity.class);
+                AppData appData = AppData.getInstance();
+                appData.setFields((ArrayList<String>) saveContents);
+                appData.setDataHeader(dataHeader);
+                /*
                 intent.putExtra("fields", extra);
                 intent.putExtra("PetId",petId);
-                intent.putExtra("dataHeader",dataHeader);
+                intent.putExtra("dataHeader",dataHeader);*/
                 startActivity(intent);
             }
         });

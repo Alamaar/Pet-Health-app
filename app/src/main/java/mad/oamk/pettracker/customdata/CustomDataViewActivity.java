@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import mad.oamk.pettracker.AppData;
 import mad.oamk.pettracker.LoginActivity;
 import mad.oamk.pettracker.R;
 import mad.oamk.pettracker.customdata.adapters.CustomDataViewAdapter;
@@ -52,12 +53,17 @@ public class CustomDataViewActivity extends AppCompatActivity {
         //TODO addbuttoni
 
 
+        AppData appData = AppData.getInstance();
+        header = appData.getDataHeader();
+        petId = appData.getPetId();
 
 
-        Intent intent = getIntent();
+        /*Intent intent = getIntent();
         petId = intent.getStringExtra("PetId");
-        header = intent.getStringExtra("dataHeader");
-        //check contents???
+        header = intent.getStringExtra("dataHeader"); //get header from cu
+        //check contents???*/
+
+
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {

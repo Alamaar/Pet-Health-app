@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import mad.oamk.pettracker.AppData;
 import mad.oamk.pettracker.LoginActivity;
 import mad.oamk.pettracker.R;
 import mad.oamk.pettracker.customdata.adapters.CustomDataAddAdapter;
@@ -34,10 +35,18 @@ public class CustomDataAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_custom_data_add);
 
 
-        Bundle extra = getIntent().getBundleExtra("fields");
+        /*Bundle extra = getIntent().getBundleExtra("fields");
         String dataHeader = getIntent().getStringExtra("dataHeader");
         String petId = getIntent().getStringExtra("PetId");
-        ArrayList<String> contents = extra.getStringArrayList("fields");
+        ArrayList<String> contents = extra.getStringArrayList("fields");*/
+
+
+        AppData appData = AppData.getInstance();
+        String dataHeader = appData.getDataHeader();
+        String petId = appData.getPetId();
+        ArrayList<String> fields = appData.getFields();
+
+
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
@@ -50,7 +59,7 @@ public class CustomDataAddActivity extends AppCompatActivity {
 
         addDataRecyclerview = findViewById(R.id.custom_data_add_recyclerView);
 
-        CustomDataAddAdapter  adapter = new CustomDataAddAdapter(contents);
+        CustomDataAddAdapter  adapter = new CustomDataAddAdapter(fields);
 
         TextView header = (TextView) findViewById(R.id.textViewHeader);
 
@@ -79,8 +88,8 @@ public class CustomDataAddActivity extends AppCompatActivity {
 
 
                 Intent intent = new Intent(CustomDataAddActivity.this, CustomDataViewActivity.class);
-                intent.putExtra("PetId",petId);
-                intent.putExtra("dataHeader",dataHeader);
+                /*intent.putExtra("PetId",petId);
+                intent.putExtra("dataHeader",dataHeader);*/
                 startActivity(intent);
 
 

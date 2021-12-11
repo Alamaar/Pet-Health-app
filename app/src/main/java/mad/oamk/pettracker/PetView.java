@@ -51,9 +51,9 @@ public class PetView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_view);
 
-        //Get pets id from intent
-        Intent intent = getIntent();
-        petId = intent.getStringExtra("PetId");
+        //Get pets id from appdata singleton
+        petId = AppData.getInstance().getPetId();
+
 
         //Get curren user from firebase instance
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -161,7 +161,7 @@ public class PetView extends AppCompatActivity {
 
     public void moveToCustom() {
         Intent intentcustom = new Intent(this, CustomDataCreateActivity.class);
-        intentcustom.putExtra("PetId",petId);
+        //intentcustom.putExtra("PetId",petId);
         startActivity(intentcustom);
     }
 
