@@ -2,12 +2,16 @@ package mad.oamk.pettracker;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.GridLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,7 +22,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import mad.oamk.pettracker.customdata.CustomDataCreateActivity;
+import mad.oamk.pettracker.customdata.CustomDataViewActivity;
 import mad.oamk.pettracker.models.Pet;
 
 public class PetView extends AppCompatActivity {
@@ -44,6 +53,10 @@ public class PetView extends AppCompatActivity {
 
     private Pet pet;
 
+    private LinkedHashMap<String,Object> buttonsMap = new LinkedHashMap<>();
+    private LinkedHashMap<String,Object> defaultButtonsMap = new LinkedHashMap<>();
+
+
     //TODO recyclerview nappeja näyttämään.
 
     @Override
@@ -64,6 +77,16 @@ public class PetView extends AppCompatActivity {
         }
         //Set refrence to pets id
         petIdRefrence = FirebaseDatabase.getInstance().getReference().child("Pets").child(user.getUid()).child("Pets").child(petId);
+
+        //Set default buttons and what activitys they go
+        defaultButtonsMap.put("Paino",MainActivity.class);
+        defaultButtonsMap.put( "Terveystiedot",null);
+        defaultButtonsMap.put("Ulkoilu",null);
+        defaultButtonsMap.put("Ruokinta", null);
+        defaultButtonsMap.put("Kuvat",null);
+
+        setButtonRecyclerView();
+
 
         // Event lisener to pet id to lissen all changes
         ValueEventListener petListener = new ValueEventListener() {
@@ -91,7 +114,7 @@ public class PetView extends AppCompatActivity {
         dateOfBirthtextview = (TextView) findViewById(R.id.dateOfBirth);
         tagtextview = (TextView) findViewById(R.id.tag);
 
-        Button btnweight = (Button) findViewById(R.id.weight);
+        /*Button btnweight = (Button) findViewById(R.id.weight);
         btnweight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,7 +122,10 @@ public class PetView extends AppCompatActivity {
             }
         });
 
-        Button buttonCustom = (Button) findViewById(R.id.buttonCustom);
+
+         */
+
+        ImageButton buttonCustom = (ImageButton) findViewById(R.id.buttonCustom);
         buttonCustom.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,6 +170,56 @@ public class PetView extends AppCompatActivity {
                 moveToOther();
             }
         });*/
+
+        setButtonRecyclerView();
+
+
+    }
+
+    private void setButtonRecyclerView() {
+        RecyclerView buttonRecyclerView = findViewById(R.id.buttonRecyclerView);
+
+
+        buttonsMap = new LinkedHashMap<>(defaultButtonsMap);
+
+        PetViewButtonAdapter adapter = new PetViewButtonAdapter(this, buttonsMap);
+
+        buttonRecyclerView.setAdapter(adapter);
+        buttonRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
+
+
+        ValueEventListener customDataEntryListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                buttonsMap.clear();
+                buttonsMap.putAll(defaultButtonsMap);
+
+                for(DataSnapshot child : snapshot.getChildren()){
+                    String dataSetName = child.getKey();
+
+                    buttonsMap.put(dataSetName, CustomDataViewActivity.class);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+
+
+        petIdRefrence.child("CustomData").addValueEventListener(customDataEntryListener);
+
+
+
+
+
+
+
+
+
+
 
 
     }

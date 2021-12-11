@@ -7,6 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -50,20 +54,16 @@ public class CustomDataViewActivity extends AppCompatActivity {
         /*intent.putExtra("PetId",petId);
         intent.putExtra("dataHeader",dataHeader);*/
 
-        //TODO addbuttoni
+        //TODO takaisin painalluksella oikeaan paikaan takas
 
 
         AppData appData = AppData.getInstance();
         header = appData.getDataHeader();
         petId = appData.getPetId();
-
-
         /*Intent intent = getIntent();
         petId = intent.getStringExtra("PetId");
         header = intent.getStringExtra("dataHeader"); //get header from cu
         //check contents???*/
-
-
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
@@ -71,11 +71,10 @@ public class CustomDataViewActivity extends AppCompatActivity {
             Intent loginintent = new Intent(this, LoginActivity.class);
             startActivity(loginintent);
         }
-
+        //Create path to custom datas reference
         customDataRefrence = FirebaseDatabase.getInstance().getReference();
         customDataRefrence = customDataRefrence.child("Pets").child(user.getUid()).child("Pets").child(petId);
         customDataRefrence = customDataRefrence.child("CustomData").child(header);
-
 
         //recyclerview adapter
         CustomDataViewAdapter adapter = new CustomDataViewAdapter(this, customDataIDs, customDataRefrence);
@@ -84,9 +83,6 @@ public class CustomDataViewActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-
 
         ValueEventListener customDataSetListener = new ValueEventListener() {
             @Override
@@ -110,21 +106,26 @@ public class CustomDataViewActivity extends AppCompatActivity {
         customDataRefrence.addValueEventListener(customDataSetListener);
 
 
+        ImageButton addDataButton = (ImageButton) findViewById(R.id.buttonAddCustomData);
+        addDataButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //get and set required fields
+                ArrayList<String> fields = (ArrayList<String>) adapter.getFields();
+                AppData appData = AppData.getInstance();
+                appData.setFields(fields);
+                appData.setDataHeader(header);
+
+                //Go to add activity
+                Intent intent = new Intent(CustomDataViewActivity.this, CustomDataAddActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+        TextView textView = (TextView) findViewById(R.id.textViewCustomView);
+        textView.setText(header);
 
     }
 }

@@ -42,6 +42,10 @@ public class CustomDataViewAdapter  extends RecyclerView.Adapter<CustomDataViewA
 
     private  List<String> fields;
 
+    public List<String> getFields() {
+        return fields;
+    }
+
     public CustomDataViewAdapter(Context context, List<String> customDataIDs, DatabaseReference reference){
         this.context = context;
         this.customDataIDs = customDataIDs;
