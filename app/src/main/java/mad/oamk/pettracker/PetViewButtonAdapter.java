@@ -1,6 +1,8 @@
 package mad.oamk.pettracker;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -63,6 +70,39 @@ public class PetViewButtonAdapter  extends RecyclerView.Adapter<PetViewButtonAda
                 context.startActivity(intent);
             }
         });
+        if(position > 5) { //default button number?? oiskohan parempaa tapaa
+            //Build database reference
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String petId = AppData.getInstance().getPetId();
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Pets").child(user.getUid()).child("Pets").child(petId).child("CustomData").child(buttonName);
+            //Create dialog on long press to confirm removing the data from given position.
+            button.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("Delete?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    reference.removeValue();
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            });
+
+                    AlertDialog dialog = builder.create();
+
+
+                    dialog.show();
+                    return true;
+                }
+
+            });
+        }
 
     }
 

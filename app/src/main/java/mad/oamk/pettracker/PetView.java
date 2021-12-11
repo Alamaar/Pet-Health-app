@@ -16,6 +16,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -111,7 +113,7 @@ public class PetView extends AppCompatActivity {
         };
 
         petIdRefrence.addValueEventListener(petListener);
-        petIdRefrence.removeEventListener(petListener); //?????
+        //petIdRefrence.removeEventListener(petListener); //?????
 
         nametextview = (TextView) findViewById(R.id.name);
         speciestextview = (TextView) findViewById(R.id.species);
@@ -204,12 +206,15 @@ public class PetView extends AppCompatActivity {
     private void setButtonRecyclerView() {
         //set up recycler view and petviewbuttonadapter
         RecyclerView buttonRecyclerView = findViewById(R.id.buttonRecyclerView);
+
+        buttonsMap = new LinkedHashMap<>(defaultButtonsMap);
+
         PetViewButtonAdapter adapter = new PetViewButtonAdapter(this, buttonsMap);
 
         buttonRecyclerView.setAdapter(adapter);
         buttonRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
 
-        buttonsMap = new LinkedHashMap<>(defaultButtonsMap);
+
 
         // set listener for pets custom data list and put theese new values to buttons map.
         ValueEventListener customDataEntryListener = new ValueEventListener() {
