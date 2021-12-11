@@ -34,100 +34,61 @@ public class CustomDataAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_data_add);
 
-
-        /*Bundle extra = getIntent().getBundleExtra("fields");
-        String dataHeader = getIntent().getStringExtra("dataHeader");
-        String petId = getIntent().getStringExtra("PetId");
-        ArrayList<String> contents = extra.getStringArrayList("fields");*/
-
-
+        //Get data from appData singleton.
         AppData appData = AppData.getInstance();
         String dataHeader = appData.getDataHeader();
         String petId = appData.getPetId();
         ArrayList<String> fields = appData.getFields();
 
-
-
+        //User login check
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
             // Not signed in, launch the Sign In activity
             Intent loginIntent = new Intent(this, LoginActivity.class);
             startActivity(loginIntent);
         }
-        //Set refrence to pets id
+        //Set reference to pets id
         DatabaseReference petIdReference = FirebaseDatabase.getInstance().getReference().child("Pets").child(user.getUid()).child("Pets").child(petId);
 
+        //Recyclerview initialization
         addDataRecyclerview = findViewById(R.id.custom_data_add_recyclerView);
-
+        //adapter for recyclerview
         CustomDataAddAdapter  adapter = new CustomDataAddAdapter(fields);
-
-        TextView header = (TextView) findViewById(R.id.textViewHeader);
-
-        header.setText(dataHeader);
-
-
         addDataRecyclerview.setAdapter(adapter);
         addDataRecyclerview.setLayoutManager(new LinearLayoutManager(this));
 
+        //Set Header text
+        TextView header = (TextView) findViewById(R.id.textViewHeader);
+        header.setText(dataHeader);
+
+
+
         Button save = (Button) findViewById(R.id.buttonSave);
+        //Button saves editext contens to firedatabes under CustomData/Header/
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Field and fielData
                 List<String> data =adapter.getEditTextFields();
                 List<String> fields = adapter.getFields();
 
-
+                //Make map from field and field datas
                 Map<String, Object> datamap = new HashMap<>();
 
-               for (int i = 0 ; i < data.size(); i++){
+                for (int i = 0 ; i < data.size(); i++){
                    datamap.put(fields.get(i).toString(), data.get(i).toString());
-               }
+                }
 
+                //Push and set values to database
                DatabaseReference customDataReference = petIdReference.child("CustomData").child(dataHeader).push();
                customDataReference.setValue(datamap);
 
-
+                //Go to view activity
                 Intent intent = new Intent(CustomDataAddActivity.this, CustomDataViewActivity.class);
-                /*intent.putExtra("PetId",petId);
-                intent.putExtra("dataHeader",dataHeader);*/
                 startActivity(intent);
-
-
-
-
-
-
-
-
-
-
-
-
             }
         });
 
-
-
-
     }
 
-    public void push(HashMap<String, Object> datamap, DatabaseReference dataBaseReference){
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
+}

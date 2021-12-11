@@ -78,7 +78,7 @@ public class PetView extends AppCompatActivity {
         //Set refrence to pets id
         petIdRefrence = FirebaseDatabase.getInstance().getReference().child("Pets").child(user.getUid()).child("Pets").child(petId);
 
-        //Set default buttons and what activitys they go
+        //Set default buttons and what activity they go
         defaultButtonsMap.put("Paino",MainActivity.class);
         defaultButtonsMap.put( "Terveystiedot",null);
         defaultButtonsMap.put("Ulkoilu",null);
@@ -177,17 +177,16 @@ public class PetView extends AppCompatActivity {
     }
 
     private void setButtonRecyclerView() {
+        //set up recycler view and petviewbuttonadapter
         RecyclerView buttonRecyclerView = findViewById(R.id.buttonRecyclerView);
-
-
-        buttonsMap = new LinkedHashMap<>(defaultButtonsMap);
-
         PetViewButtonAdapter adapter = new PetViewButtonAdapter(this, buttonsMap);
 
         buttonRecyclerView.setAdapter(adapter);
         buttonRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
 
+        buttonsMap = new LinkedHashMap<>(defaultButtonsMap);
 
+        // set listener for pets custom data list and put theese new values to buttons map.
         ValueEventListener customDataEntryListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -208,20 +207,7 @@ public class PetView extends AppCompatActivity {
             }
         };
 
-
         petIdRefrence.child("CustomData").addValueEventListener(customDataEntryListener);
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     private void setValues() {

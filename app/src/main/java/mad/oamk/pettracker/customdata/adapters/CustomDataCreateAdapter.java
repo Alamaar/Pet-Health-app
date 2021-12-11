@@ -17,7 +17,7 @@ import mad.oamk.pettracker.R;
 
 public class CustomDataCreateAdapter extends RecyclerView.Adapter<CustomDataCreateAdapter.ViewHolder> {
 
-    private List<String> contents = new ArrayList<>();
+    private List<String> contents;
 
     public List<String> getContents() {
         return contents;
@@ -27,20 +27,14 @@ public class CustomDataCreateAdapter extends RecyclerView.Adapter<CustomDataCrea
         this.contents = contents;
     }
 
-    public void addField() {
-        contents.add("");
-    }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private EditText editText;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             editText = (EditText) itemView.findViewById(R.id.editText);
         }
-
-
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -53,6 +47,7 @@ public class CustomDataCreateAdapter extends RecyclerView.Adapter<CustomDataCrea
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            //add TextWatcher to edit text fields. All changes are then updated to contents.
             holder.editText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -61,6 +56,7 @@ public class CustomDataCreateAdapter extends RecyclerView.Adapter<CustomDataCrea
 
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    int position = holder.getAdapterPosition();
                     contents.remove(position);
                     contents.add(position,charSequence.toString());
                 }
@@ -71,9 +67,6 @@ public class CustomDataCreateAdapter extends RecyclerView.Adapter<CustomDataCrea
                 }
             });
     }
-
-
-
 
     @Override
     public int getItemCount() {

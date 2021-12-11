@@ -18,15 +18,13 @@ import mad.oamk.pettracker.R;
 
 public class CustomDataAddAdapter extends RecyclerView.Adapter<CustomDataAddAdapter.ViewHolder> {
 
-    //kenttä nimi ja edit text
-
-    public List<String> getFields() {
-        return fields;
-    }
 
     private List<String> fields;
     private List<String> editTextFields;
 
+    public List<String> getFields() {
+        return fields;
+    }
     public List<String> getEditTextFields() {
         return editTextFields;
     }
@@ -63,13 +61,11 @@ public class CustomDataAddAdapter extends RecyclerView.Adapter<CustomDataAddAdap
     @Override
     public void onBindViewHolder(@NonNull CustomDataAddAdapter.ViewHolder holder, int position) {
 
-
+        //add TextWatcher to edit text fields. All changes are then updated to editextFields array
         holder.editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 int position = holder.getAdapterPosition();
@@ -86,9 +82,6 @@ public class CustomDataAddAdapter extends RecyclerView.Adapter<CustomDataAddAdap
 
         holder.headerTextView.setText(fields.get(holder.getAdapterPosition()));
     }
-
-
-
 
     @Override
     public int getItemCount() {
