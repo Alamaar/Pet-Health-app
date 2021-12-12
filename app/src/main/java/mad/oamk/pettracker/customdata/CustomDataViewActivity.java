@@ -25,6 +25,7 @@ import java.util.List;
 
 import mad.oamk.pettracker.AppData;
 import mad.oamk.pettracker.LoginActivity;
+import mad.oamk.pettracker.PetView;
 import mad.oamk.pettracker.R;
 import mad.oamk.pettracker.customdata.adapters.CustomDataViewAdapter;
 
@@ -128,4 +129,11 @@ public class CustomDataViewActivity extends AppCompatActivity {
         textView.setText(header);
 
     }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(CustomDataViewActivity.this, PetView.class);
+        startActivity(intent);
+    }
+
+
 }

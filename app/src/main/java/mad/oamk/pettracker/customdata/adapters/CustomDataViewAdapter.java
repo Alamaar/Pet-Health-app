@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -84,12 +85,13 @@ public class CustomDataViewAdapter  extends RecyclerView.Adapter<CustomDataViewA
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.custom_data_view_list, parent, false);
 
-        return new CustomDataViewAdapter.ViewHolder(view);
+        return new CustomDataViewAdapter.ViewHolder(view, 5);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        holder.linearLayout.removeAllViews();
 
         //From customdata id get the id referring to viewholder in this position
         DatabaseReference idReference  = reference.child(customDataIDs.get(holder.getAdapterPosition()));
@@ -110,7 +112,7 @@ public class CustomDataViewAdapter  extends RecyclerView.Adapter<CustomDataViewA
                     for(int i = 0; i < fields.size(); i++){
 
                         View layout = LayoutInflater.from(holder.itemView.getContext())
-                                .inflate(R.layout.custom_data_view_list_field, (ViewGroup) holder.itemView.getParent(),false);
+                                .inflate(R.layout.custom_data_view_list_field, holder.linearLayout,false);
 
                         TextView field = layout.findViewById(R.id.textViewField);
                         TextView fieldData = (TextView) layout.findViewById(R.id.textViewFieldData);
@@ -122,7 +124,7 @@ public class CustomDataViewAdapter  extends RecyclerView.Adapter<CustomDataViewA
 
                     }
                     //Resize layout
-                    holder.linearLayout.requestLayout();
+                    holder.linearLayout.getParent().getParent().requestLayout();
 
                     }
 
@@ -167,14 +169,13 @@ public class CustomDataViewAdapter  extends RecyclerView.Adapter<CustomDataViewA
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private View linearLayout;
+        private ViewGroup linearLayout;
         private LinearLayout fieldLayout;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, int number_of_fields) {
             super(itemView);
 
            linearLayout =  itemView.findViewById(R.id.linearLayout);
-
         }
     }
 

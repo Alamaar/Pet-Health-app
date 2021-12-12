@@ -119,7 +119,7 @@ public class PetView extends AppCompatActivity {
         speciestextview = (TextView) findViewById(R.id.species);
         breedtextview = (TextView) findViewById(R.id.breed);
         dateOfBirthtextview = (TextView) findViewById(R.id.dateOfBirth);
-        tagtextview = (TextView) findViewById(R.id.tag);
+        //tagtextview = (TextView) findViewById(R.id.tag);
 
         /*Button btnweight = (Button) findViewById(R.id.weight);
         btnweight.setOnClickListener(new OnClickListener() {
