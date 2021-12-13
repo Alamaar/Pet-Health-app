@@ -5,14 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -55,6 +53,22 @@ public class PetView extends AppCompatActivity {
         Intent intent = getIntent();
         petId = intent.getStringExtra("PetId");
 
+        // Button to move WeightActivity
+        Button btnweight = (Button) findViewById(R.id.weight);
+        btnweight.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PetView.this, WeightActivity.class);
+                intent.putExtra("PetId", petId);
+                startActivity(intent);
+            }
+        });
+
+
+        //Get pets id from intent
+        Intent intent1 = getIntent();
+        petId = intent1.getStringExtra("PetId");
+
         //Get curren user from firebase instance
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
@@ -89,13 +103,7 @@ public class PetView extends AppCompatActivity {
         dateOfBirthtextview = (TextView) findViewById(R.id.dateOfBirth);
         tagtextview = (TextView) findViewById(R.id.tag);
 
-        Button btnweight = (Button) findViewById(R.id.weight);
-        btnweight.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //moveToWeight();
-            }
-        });
+
 
 
         /*Button btnhealthness = (Button) findViewById(R.id.healthness);
@@ -141,38 +149,10 @@ public class PetView extends AppCompatActivity {
     private void setValues() {
         //Set values
         nametextview.setText(pet.getName());
+        speciestextview.setText(pet.getSpecies());
+        breedtextview.setText(pet.getBreed());
+        dateOfBirthtextview.setText(pet.getDateOfBirth());
+        tagtextview.setText(pet.getTagID());
         //TODO loput tiedot
     }
-
-    public void moveToWeight() {
-        //Intent intent = new Intent(this, WeightActivity.class);
-        //startActivity(intent);
-    }
 }
-/*
-    public void moveToHealthness() {
-        Intent intent = new Intent(this, HealthnessActivity.class);
-        startActivity(intent);
-    }
-
-    public void moveToActivities() {
-        Intent intent = new Intent(this, ActivitiesActivity.class);
-        startActivity(intent);
-    }
-
-    public void moveToFeed() {
-        Intent intent = new Intent(this, FeedActivity.class);
-        startActivity(intent);
-    }
-
-    public void moveToImages() {
-        Intent intent = new Intent(this, ImagesActivity.class);
-        startActivity(intent);
-    }
-
-    public void moveToOther() {
-        Intent intent = new Intent(this, OtherActivity.class);
-        startActivity(intent);
-    }
-}
-*/
