@@ -5,46 +5,15 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    tools:context=".AddPetActivity">
+    tools:context=".UpdatePetActivity">
 
     <TextView
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
-        android:text="Enter your pet's information:"
+        android:text="Update your pet's information:"
         android:textSize="20dp" />
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        app:cardCornerRadius="250dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="20dp">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@drawable/btn_background"
-            android:visibility="visible"
-            app:cardCornerRadius="250dp">
-
-
-
-            <ImageButton
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_action_pets"
-                android:background="@drawable/btn_background"
-                />
-
-            </androidx.cardview.widget.CardView>
-
-    </androidx.cardview.widget.CardView>
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="300dp"
@@ -53,7 +22,7 @@
         android:layout_marginTop="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtInput1"
+            android:id="@+id/txtUpdateInput1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Name" />
@@ -66,7 +35,7 @@
         android:layout_marginTop="5dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtInput2"
+            android:id="@+id/txtUpdateInput2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Species" />
@@ -79,7 +48,7 @@
         android:layout_marginTop="5dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtInput3"
+            android:id="@+id/txtUpdateInput3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Breed" />
@@ -92,20 +61,20 @@
         android:layout_marginTop="5dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtInput4"
+            android:id="@+id/txtUpdateInput4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Date of Birth (DD-MM-YYYY)" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btnAdd"
+        android:id="@+id/btnUpdate"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="0dp"
         android:layout_marginTop="10dp"
-        android:text="Add Pet"
+        android:text="Update Information"
         android:textColor="@color/black" />
 
 </LinearLayout>
