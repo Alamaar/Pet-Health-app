@@ -86,10 +86,10 @@ public class PetView extends AppCompatActivity {
         petIdRefrence = FirebaseDatabase.getInstance().getReference().child("Pets").child(user.getUid()).child("Pets").child(petId);
 
         //Set default buttons and what activity they go
-        defaultButtonsMap.put("Paino", MainActivity.class);
+        defaultButtonsMap.put("Paino", WeightActivity.class);
         defaultButtonsMap.put("Terveystiedot", null);
-        defaultButtonsMap.put("Ulkoilu", null);
-        defaultButtonsMap.put("Ruokinta", null);
+        defaultButtonsMap.put("Ulkoilu", Activities_activity.class);
+        defaultButtonsMap.put("Ruokinta", Feeding_activity.class);
         defaultButtonsMap.put("Kuvat", null);
 
         setButtonRecyclerView();

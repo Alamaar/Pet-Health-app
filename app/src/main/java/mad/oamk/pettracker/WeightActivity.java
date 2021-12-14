@@ -64,9 +64,8 @@ public class WeightActivity extends AppCompatActivity {
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
 
-        //Get pets id from intent
-        Intent intent = getIntent();
-        petId = intent.getStringExtra("PetId");
+        //Get pets id
+        petId =  petId = AppData.getInstance().getPetId();
 
         // ImageButton to move AddWeightData activity
         ImageButton btnplus = (ImageButton) findViewById(R.id.btnAddData);
@@ -74,14 +73,11 @@ public class WeightActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(WeightActivity.this, AddWeightDataActivity.class);
-                intent.putExtra("PetId", petId);
                 startActivity(intent);
             }
         });
 
-        //Get pets id from intent
-        Intent intent1 = getIntent();
-        petId = intent1.getStringExtra("PetId");
+
 
         //Get curren user from firebase instance
         fireuser = FirebaseAuth.getInstance().getCurrentUser();
@@ -108,6 +104,7 @@ public class WeightActivity extends AppCompatActivity {
         ValueEventListener petListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                stringArrayList.clear();
                 for (DataSnapshot child : snapshot.getChildren()){
 
                     Map<String, Object> weightmap = (Map<String, Object>) child.getValue();

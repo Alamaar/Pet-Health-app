@@ -32,7 +32,7 @@ public class AddWeightDataActivity extends AppCompatActivity {
 
         //Get pets id from intent
         Intent intent = getIntent();
-        petId = intent.getStringExtra("PetId");
+        petId = AppData.getInstance().getPetId();
 
         // Tarkistetaan onko käyttäjä edelleen kirjautunut:
         fireuser = FirebaseAuth.getInstance().getCurrentUser();
