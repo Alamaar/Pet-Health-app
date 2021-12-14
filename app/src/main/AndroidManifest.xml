@@ -34,6 +34,13 @@
             android:name=".PetView"
             android:exported="false" />
         <activity
+            android:name=".AddWeightDataActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WeightActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

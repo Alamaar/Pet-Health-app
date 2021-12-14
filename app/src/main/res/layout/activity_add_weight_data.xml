@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context=".AddWeightDataActivity">
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:text="Enter your pets weight:"
+        android:textSize="20dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_date"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Date" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Weight" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_sendweight"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:text="Send weight"
+        android:textColor="@color/black" />
+
+</LinearLayout>
