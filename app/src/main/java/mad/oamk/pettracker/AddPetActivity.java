@@ -75,7 +75,9 @@ public class AddPetActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(add()){
-                    uploadImage(uriimage);
+                    if(uriimage != null) {
+                        uploadImage(uriimage);
+                    }
 
                     Intent intent = new Intent(AddPetActivity.this, MainActivity.class);
                     startActivity(intent);
