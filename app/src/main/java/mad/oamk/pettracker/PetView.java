@@ -113,7 +113,7 @@ public class PetView extends AppCompatActivity {
         };
 
         petIdRefrence.addValueEventListener(petListener);
-        //petIdRefrence.removeEventListener(petListener); //?????
+        petIdRefrence.removeEventListener(petListener); //?????
 
         nametextview = (TextView) findViewById(R.id.name);
         speciestextview = (TextView) findViewById(R.id.species);

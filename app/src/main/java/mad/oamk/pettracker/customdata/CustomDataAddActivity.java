@@ -40,6 +40,8 @@ public class CustomDataAddActivity extends AppCompatActivity {
         String petId = appData.getPetId();
         ArrayList<String> fields = appData.getFields();
 
+        //TODO fields ja osoitteela vois käyttäää muihinkin
+
         //User login check
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
