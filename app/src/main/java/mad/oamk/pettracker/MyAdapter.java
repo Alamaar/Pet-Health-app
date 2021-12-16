@@ -3,6 +3,7 @@ package mad.oamk.pettracker;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,8 +28,7 @@ import mad.oamk.pettracker.models.Pet;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
-    String data1[];
-    int image;
+    int defaultImage;
     private Context context;
 
     //Array list to contain all pet id's
@@ -40,7 +40,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public MyAdapter(Context ct, List<String> petIdKeyList, int img, DatabaseReference petRefrence) {
         this.petIdKeyList = petIdKeyList;
         //data1 = s1;
-        image = img;
+        defaultImage = img;
         context = ct;
         baseRefrence = petRefrence;
     }
@@ -85,9 +85,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                     Pet pet = task.getResult().getValue(Pet.class);
 
                     String name = pet.getName();
-                    String imageUrl = pet.getPhotoUrl();
                     holder.myText1.setText(name);
-                    Glide.with(holder.itemView).load(imageUrl).into(holder.myImage);
+
+                    String imageUrl = pet.getPhotoUrl();
+                    if (imageUrl != null) {
+                        Glide.with(holder.itemView).load(imageUrl).into(holder.myImage);
+                    }
+                    else {
+
+                        holder.myImage.setImageResource(defaultImage);
+                    }
 
 
                 }
