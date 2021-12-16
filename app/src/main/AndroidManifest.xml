@@ -16,6 +16,9 @@
             android:name=".Feeding_activity"
             android:exported="false" />
         <activity
+            android:name=".AddFeedingActivity"
+            android:exported="false" />
+        <activity
             android:name=".customdata.CustomDataAddActivity"
             android:exported="false" />
         <activity
