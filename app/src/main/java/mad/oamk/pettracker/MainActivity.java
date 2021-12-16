@@ -22,18 +22,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     RecyclerView recyclerView;
 
-    String s1[];
 
     private List<String> petIdKeyList = new ArrayList<String>();
 
-    private DatabaseReference baseRefrence;
-    private FirebaseUser user;
-
-    int defaultImage = R.drawable.ic_action_pets;
 
 
     @Override
@@ -42,16 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        // Initialize Firebase and check if the user is signed in
-         user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null) {
-            // Not signed in, launch the Sign In activity
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-        }
-
-        baseRefrence = FirebaseDatabase.getInstance().getReference().child("Pets").child(user.getUid()).child("Pets");
-
+        DatabaseReference baseRefrence = FirebaseDatabase.getInstance().getReference().child("Pets").child(user.getUid()).child("Pets");
 
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -59,11 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
         //TODO lemmikkien nimien hakeminen firebasesta ja tallentaminen s1:een
 
-        MyAdapter myAdapter = new MyAdapter(this, petIdKeyList, defaultImage,  baseRefrence);
+        MyAdapter myAdapter = new MyAdapter(this, petIdKeyList, R.drawable.ic_action_pets, baseRefrence);
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
 
 
 
@@ -98,27 +82,6 @@ public class MainActivity extends AppCompatActivity {
         baseRefrence.addValueEventListener(petListListener);
 
 
-
-        //TODO siirtäminen menuun
-        //Sign out button
-        Button signOutButton = (Button) findViewById(R.id.sign_out_button);
-        signOutButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-        //TODO Voidaan poistaa myöhemmässä vaiheessa
-        //Test activity button
-        //Button testing_activity = (Button) findViewById(R.id.test_activity_button);
-        /*testing_activity.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, DbTestingActivity.class);
-                startActivity(intent);
-            }
-        });*/
         // Avataan lemmikinlisäysikkuna:
         ImageButton add_pet_activity = (ImageButton) findViewById(R.id.btnAddPet);
         add_pet_activity.setOnClickListener(new View.OnClickListener(){

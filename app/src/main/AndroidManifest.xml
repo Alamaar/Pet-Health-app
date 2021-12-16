@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mad.oamk.pettracker" >
+    package="mad.oamk.pettracker">
 
     <application
         android:allowBackup="true"
@@ -8,7 +8,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PetTracker" >
+        android:theme="@style/Theme.PetTracker">
+        <activity
+            android:name=".BaseActivity"
+            android:exported="false" />
         <activity
             android:name=".Activities_activity"
             android:exported="false" />
@@ -47,7 +50,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

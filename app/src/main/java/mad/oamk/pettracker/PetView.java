@@ -1,7 +1,6 @@
 package mad.oamk.pettracker;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,8 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.ImageButton;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,42 +16,26 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 import mad.oamk.pettracker.customdata.CustomDataCreateActivity;
 import mad.oamk.pettracker.customdata.CustomDataViewActivity;
 import mad.oamk.pettracker.models.Pet;
 
-public class PetView extends AppCompatActivity {
+public class PetView extends BaseActivity {
 
     private TextView nametextview;
     private TextView speciestextview;
     private TextView breedtextview;
     private TextView dateOfBirthtextview;
-    private TextView tagtextview;
-    private Button btnweight;
-    private Button btnhealthness;
-    private Button btnactivities;
-    private Button btnfeed;
-    private Button btnimages;
-    private Button btnother;
 
-
-    private DatabaseReference petIdRefrence;
-
-    private String petId;
-
-    private FirebaseUser user;
+    private DatabaseReference petIdReference;
 
     private ValueEventListener petListener;
 
@@ -64,8 +45,6 @@ public class PetView extends AppCompatActivity {
     private LinkedHashMap<String,Object> defaultButtonsMap = new LinkedHashMap<>();
 
 
-    //TODO recyclerview nappeja näyttämään.
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,16 +53,8 @@ public class PetView extends AppCompatActivity {
         //Get pets id from appdata singleton
         petId = AppData.getInstance().getPetId();
 
-
-        //Get curren user from firebase instance
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null) {
-            // Not signed in, launch the Sign In activity
-            Intent loginIntent = new Intent(this, LoginActivity.class);
-            startActivity(loginIntent);
-        }
         //Set refrence to pets id
-        petIdRefrence = FirebaseDatabase.getInstance().getReference().child("Pets").child(user.getUid()).child("Pets").child(petId);
+        petIdReference = FirebaseDatabase.getInstance().getReference().child("Pets").child(user.getUid()).child("Pets").child(petId);
 
         //Set default buttons and what activity they go
         defaultButtonsMap.put("Paino", WeightActivity.class);
@@ -95,7 +66,7 @@ public class PetView extends AppCompatActivity {
         setButtonRecyclerView();
 
 
-        // Event lisener to pet id to lissen all changes
+        //Get pets info
         petListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -103,7 +74,7 @@ public class PetView extends AppCompatActivity {
                 //get pet to pet class
                 pet = snapshot.getValue(Pet.class);
                 //set values
-                setValues();
+                setValues(pet);
             }
 
             @Override
@@ -112,8 +83,7 @@ public class PetView extends AppCompatActivity {
             }
         };
 
-        petIdRefrence.addValueEventListener(petListener);
-        petIdRefrence.removeEventListener(petListener); //?????
+        petIdReference.addListenerForSingleValueEvent(petListener);
 
         nametextview = (TextView) findViewById(R.id.name);
         speciestextview = (TextView) findViewById(R.id.species);
@@ -121,16 +91,7 @@ public class PetView extends AppCompatActivity {
         dateOfBirthtextview = (TextView) findViewById(R.id.dateOfBirth);
         //tagtextview = (TextView) findViewById(R.id.tag);
 
-        /*Button btnweight = (Button) findViewById(R.id.weight);
-        btnweight.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //moveToWeight();
-            }
-        });
 
-
-         */
 
         ImageButton buttonCustom = (ImageButton) findViewById(R.id.buttonCustom);
         buttonCustom.setOnClickListener(new OnClickListener() {
@@ -140,43 +101,6 @@ public class PetView extends AppCompatActivity {
             }
         });
 
-
-
-        /*Button btnhealthness = (Button) findViewById(R.id.healthness);
-        btnhealthness.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                moveToHealthness();
-            }
-        });
-        Button btnactivities = (Button) findViewById(R.id.activities);
-        btnactivities.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                moveToActivities();
-            }
-        });
-        Button btnfeed = (Button) findViewById(R.id.feed);
-        btnfeed.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                moveToFeed();
-            }
-        });
-        Button btnimages = (Button) findViewById(R.id.images);
-        btnimages.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                moveToImages();
-            }
-        });
-        Button btnother = (Button) findViewById(R.id.other);
-        btnother.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                moveToOther();
-            }
-        });*/
 
         setButtonRecyclerView();
 
@@ -237,16 +161,15 @@ public class PetView extends AppCompatActivity {
             }
         };
 
-        petIdRefrence.child("CustomData").addValueEventListener(customDataEntryListener);
+        petIdReference.child("CustomData").addValueEventListener(customDataEntryListener);
     }
 
-    private void setValues() {
+    private void setValues(Pet pet) {
         //Set values to the textviews:
         nametextview.setText(pet.getName());
         speciestextview.setText(pet.getSpecies());
         breedtextview.setText(pet.getBreed());
         dateOfBirthtextview.setText(pet.getDateOfBirth());
-
     }
 
     public void moveToWeight() {
@@ -263,9 +186,9 @@ public class PetView extends AppCompatActivity {
 
 
     public void delete(){
-        petIdRefrence.removeEventListener(petListener);
+        petIdReference.removeEventListener(petListener);
         // Poistaa tietyn lemmikin ID:n perusteella:
-        DatabaseReference petsref = petIdRefrence;
+        DatabaseReference petsref = petIdReference;
         petsref.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -283,30 +206,3 @@ public class PetView extends AppCompatActivity {
 
 }
 
-/*
-    public void moveToHealthness() {
-        Intent intent = new Intent(this, HealthnessActivity.class);
-        startActivity(intent);
-    }
-
-    public void moveToActivities() {
-        Intent intent = new Intent(this, ActivitiesActivity.class);
-        startActivity(intent);
-    }
-
-    public void moveToFeed() {
-        Intent intent = new Intent(this, FeedActivity.class);
-        startActivity(intent);
-    }
-
-    public void moveToImages() {
-        Intent intent = new Intent(this, ImagesActivity.class);
-        startActivity(intent);
-    }
-
-    public void moveToOther() {
-        Intent intent = new Intent(this, OtherActivity.class);
-        startActivity(intent);
-    }
-}
-*/
