@@ -65,11 +65,11 @@ public class PetView extends BaseActivity {
         petIdReference = FirebaseDatabase.getInstance().getReference().child("Pets").child(user.getUid()).child("Pets").child(petId);
 
         //Set default buttons and what activity they go
-        defaultButtonsMap.put("Paino", WeightActivity.class);
-        defaultButtonsMap.put("Terveystiedot", null);
-        defaultButtonsMap.put("Ulkoilu", Activities_activity.class);
-        defaultButtonsMap.put("Ruokinta", Feeding_activity.class);
-        defaultButtonsMap.put("Kuvat", ImagesActivity.class);
+        defaultButtonsMap.put(getString(R.string.weight), WeightActivity.class);
+        defaultButtonsMap.put(getString(R.string.health), null);
+        defaultButtonsMap.put(getString(R.string.activity), Activities_activity.class);
+        defaultButtonsMap.put(getString(R.string.feeding), Feeding_activity.class);
+        defaultButtonsMap.put(getString(R.string.pictures), ImagesActivity.class);
 
         setButtonRecyclerView();
 
@@ -189,11 +189,11 @@ public class PetView extends BaseActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(PetView.this, "Succesfully deleted.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PetView.this, getString(R.string.succesfully_deleted), Toast.LENGTH_SHORT).show();
                     PetView.this.finish();
                 }
                 else {
-                    Toast.makeText(PetView.this, "Failed.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PetView.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -61,7 +61,7 @@ public class AddWeightDataActivity extends AppCompatActivity {
 
         // Kaikkien kenttien pitää olla täytettynä:
         if(edittext1.getText().length() == 0  || edittext2.getText().length() == 0) {
-            Toast toast = Toast.makeText(this, "Fill in the required fields.", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, getString(R.string.fill_in_the_required_fields), Toast.LENGTH_LONG);
             toast.show();
         }
         else {
@@ -76,7 +76,7 @@ public class AddWeightDataActivity extends AppCompatActivity {
             DatabaseReference ref = petsref.child("Weight").push();
             ref.setValue(weightmap);
 
-            Toast toast = Toast.makeText(this, "New weight added.",Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, getString(R.string.new_wight_added),Toast.LENGTH_LONG);
             toast.show();
             finish();
         }

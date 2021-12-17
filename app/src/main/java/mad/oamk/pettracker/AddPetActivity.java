@@ -107,7 +107,7 @@ public class AddPetActivity extends AppCompatActivity {
 
         // Kaikkien kenttien pitää olla täytettynä:
         if(editText1.getText().length() == 0  || editText2.getText().length() == 0 || editText3.getText().length() == 0 || editText4.getText().length() == 0) {
-            Toast toast = Toast.makeText(this, "Fill in the required fields.",Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, getString(R.string.fill_in_the_required_fields),Toast.LENGTH_LONG);
             toast.show();
             return false;
         }
@@ -123,7 +123,7 @@ public class AddPetActivity extends AppCompatActivity {
 
             petsReference.setValue(pet);
 
-            Toast toast = Toast.makeText(this, "New pet added.",Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, getString(R.string.new_pet_added),Toast.LENGTH_LONG);
             toast.show();
             return true;
         }
