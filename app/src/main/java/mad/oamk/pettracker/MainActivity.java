@@ -36,6 +36,9 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Delete back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
 
         DatabaseReference baseRefrence = FirebaseDatabase.getInstance().getReference().child("Pets").child(user.getUid()).child("Pets");
 

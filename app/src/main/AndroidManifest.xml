@@ -14,21 +14,25 @@
             android:exported="false" />
         <activity
             android:name=".Activities_activity"
+            android:parentActivityName=".PetView"
             android:exported="false" />
         <activity
             android:name=".Feeding_activity"
+            android:parentActivityName=".PetView"
             android:exported="false" />
         <activity
             android:name=".customdata.CustomDataAddActivity"
             android:exported="false" />
         <activity
             android:name=".customdata.CustomDataViewActivity"
+            android:parentActivityName=".PetView"
             android:exported="false" />
         <activity
             android:name=".customdata.CustomDataCreateActivity"
             android:exported="false" />
         <activity
             android:name=".UpdatePetActivity"
+            android:parentActivityName=".PetView"
             android:exported="false" />
         <activity
             android:name=".AddPetActivity"
@@ -41,12 +45,14 @@
             android:exported="false" />
         <activity
             android:name=".PetView"
+            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".AddWeightDataActivity"
             android:exported="false" />
         <activity
             android:name=".WeightActivity"
+            android:parentActivityName=".PetView"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
