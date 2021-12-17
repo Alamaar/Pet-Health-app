@@ -22,7 +22,7 @@
         android:layout_width="213dp"
         android:layout_height="73dp"
         android:layout_marginTop="24dp"
-        android:text="TextView"
+        android:text="@string/textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginBottom="16dp"
-        android:text="ADD"
+        android:text="@string/add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/add_weight"
         app:layout_constraintStart_toStartOf="parent" />
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginBottom="16dp"
-        android:text="DELETE"
+        android:text="@string/delete_caps"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginBottom="16dp"
-        android:text="ADD weight"
+        android:text="@string/add_weight_caps"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/delete_pet"
         app:layout_constraintStart_toEndOf="@+id/add_pet" />
