@@ -22,7 +22,7 @@
     <string name="delete">Delete?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="pet_information_updated">Pet's information updated.</string>
+    <string name="pet_information_updated">Pet\'s information updated.</string>
 
 
     <string-array name="pet_names">

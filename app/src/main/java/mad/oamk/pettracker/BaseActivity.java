@@ -66,14 +66,6 @@ public class BaseActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.menu_change_language:
-                if(Locale.getDefault() == new Locale("en")){
-                    setLocale(this, "fi");
-                }
-                else {
-                    setLocale(this,"en" );
-                }
-                return true;
             case R.id.home:
                 Intent homeIntent = new Intent(this, MainActivity.class);
                 startActivity(homeIntent);
@@ -83,14 +75,6 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public static void setLocale(Activity activity, String languageCode) {
-        Locale locale = new Locale(languageCode);
-        Locale.setDefault(locale);
-        Resources resources = activity.getResources();
-        Configuration config = resources.getConfiguration();
-        config.setLocale(locale);
-        resources.updateConfiguration(config, resources.getDisplayMetrics());
-    }
 
 
 }

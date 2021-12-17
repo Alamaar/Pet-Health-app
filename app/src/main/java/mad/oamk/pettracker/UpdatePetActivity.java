@@ -125,7 +125,7 @@ public class UpdatePetActivity extends AppCompatActivity {
 
             petsref.updateChildren(map);
 
-            Toast toast = Toast.makeText(this, getString(R.string.pet_information_updated,Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, getString(R.string.pet_information_updated),Toast.LENGTH_LONG);
             toast.show();
 
             UpdatePetActivity.this.finish();
