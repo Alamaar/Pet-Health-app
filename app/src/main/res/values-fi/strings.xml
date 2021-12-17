@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Lemmikkini.fi</string>
-    <string name="weight">WEIGHT</string>
-    <string name="health">HEALTH</string>
-    <string name="activity">ACTIVITY</string>
-    <string name="feeding">FEEDING</string>
-    <string name="pictures">PICTURES</string>
+    <string name="weight">PAINO</string>
+    <string name="health">TERVEYS</string>
+    <string name="activity">AKTIIVISUUS</string>
+    <string name="feeding">RUOKINTA</string>
+    <string name="pictures">KUVAT</string>
 
 
     <string-array name="pet_names">
