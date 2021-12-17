@@ -10,30 +10,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetTracker">
         <activity
+            android:name=".ImagesActivity"
+            android:exported="false" />
+        <activity
             android:name=".BaseActivity"
             android:exported="false" />
         <activity
             android:name=".Activities_activity"
-            android:parentActivityName=".PetView"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".PetView" />
         <activity
             android:name=".Feeding_activity"
-            android:parentActivityName=".PetView"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".PetView" />
         <activity
             android:name=".customdata.CustomDataAddActivity"
             android:exported="false" />
         <activity
             android:name=".customdata.CustomDataViewActivity"
-            android:parentActivityName=".PetView"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".PetView" />
         <activity
             android:name=".customdata.CustomDataCreateActivity"
             android:exported="false" />
         <activity
             android:name=".UpdatePetActivity"
-            android:parentActivityName=".PetView"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".PetView" />
         <activity
             android:name=".AddPetActivity"
             android:exported="false" />
@@ -45,15 +48,15 @@
             android:exported="false" />
         <activity
             android:name=".PetView"
-            android:parentActivityName=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".AddWeightDataActivity"
             android:exported="false" />
         <activity
             android:name=".WeightActivity"
-            android:parentActivityName=".PetView"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".PetView" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
