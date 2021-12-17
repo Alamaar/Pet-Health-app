@@ -88,9 +88,9 @@ public class PetView extends AppCompatActivity {
         //Set default buttons and what activity they go
         defaultButtonsMap.put(getString(R.string.weight), WeightActivity.class);
         defaultButtonsMap.put(getString(R.string.health), null);
-        defaultButtonsMap.put(String.valueOf(R.string.activity), Activities_activity.class);
-        defaultButtonsMap.put(String.valueOf(R.string.feeding), Feeding_activity.class);
-        defaultButtonsMap.put(String.valueOf(R.string.pictures), null);
+        defaultButtonsMap.put(getString(R.string.activity), Activities_activity.class);
+        defaultButtonsMap.put(getString(R.string.feeding), Feeding_activity.class);
+        defaultButtonsMap.put(getString(R.string.pictures), null);
 
         setButtonRecyclerView();
 
@@ -195,7 +195,7 @@ public class PetView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PetView.this, UpdatePetActivity.class);
-                intent.putExtra("PetId", petId);
+                intent.putExtra(getString(R.string.petID), petId);
                 startActivity(intent);
             }
         });
@@ -270,11 +270,11 @@ public class PetView extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(PetView.this, "Succesfully deleted.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PetView.this, getString(R.string.succesfully_deleted), Toast.LENGTH_SHORT).show();
                     PetView.this.finish();
                 }
                 else {
-                    Toast.makeText(PetView.this, "Failed.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PetView.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                 }
             }
         });

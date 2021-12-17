@@ -5,6 +5,20 @@
     <string name="activity">ACTIVITY</string>
     <string name="feeding">FEEDING</string>
     <string name="pictures">PICTURES</string>
+    <string name="petID">petID</string>
+    <string name="succesfully_deleted">Succesfully deleted</string>
+    <string name="failed">Failed</string>
+    <string name="fill_in_the_required_fields">Fill in the required fields</string>
+    <string name="new_pet_added">New pet added.</string>
+    <string name="new_wight_added">New weight added.</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_out">Sign out</string>
+    <string name="signed_in_ass">Signed in as :</string>
+    <string name="sign_in_failed">Sign in failed</string>
+    <string name="delete">Delete?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="pet_information_updated">Pet's information updated.</string>
 
 
     <string-array name="pet_names">

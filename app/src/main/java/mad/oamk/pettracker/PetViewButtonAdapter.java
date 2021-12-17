@@ -80,14 +80,14 @@ public class PetViewButtonAdapter  extends RecyclerView.Adapter<PetViewButtonAda
                 @Override
                 public boolean onLongClick(View view) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setMessage("Delete?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    builder.setMessage(R.string.delete)
+                            .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     reference.removeValue();
                                 }
                             })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     dialogInterface.dismiss();

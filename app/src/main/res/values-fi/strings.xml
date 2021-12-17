@@ -5,6 +5,20 @@
     <string name="activity">AKTIIVISUUS</string>
     <string name="feeding">RUOKINTA</string>
     <string name="pictures">KUVAT</string>
+    <string name="petID">lemmikinID</string>
+    <string name="succesfully_deleted">Poisto onnistui</string>
+    <string name="failed">Virhe</string>
+    <string name="fill_in_the_required_fields">Täytä vaaditut kentät</string>
+    <string name="new_pet_added">Uusi lemmikki lisätty.</string>
+    <string name="new_wight_added">Uusi paino lisätty.</string>
+    <string name="sign_in">Kirjaudu</string>
+    <string name="sign_out">Kirjaudu ulos</string>
+    <string name="signed_in_ass">Kirjautuneena :</string>
+    <string name="sign_in_failed">Kirjautuminen epäonnistui</string>
+    <string name="delete">Poista?</string>
+    <string name="yes">Kyllä</string>
+    <string name="no">Ei</string>
+    <string name="pet_information_updated">Lemmikin tiedot päivitetty</string>
 
 
     <string-array name="pet_names">
