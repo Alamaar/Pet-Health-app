@@ -45,6 +45,9 @@ public class BaseActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(getString(R.string.app_name));
 
+        //Add back button
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
     }
 

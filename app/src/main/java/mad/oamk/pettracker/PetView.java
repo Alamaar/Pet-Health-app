@@ -6,13 +6,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.LinkedHashMap;
+import java.util.Objects;
 
 import mad.oamk.pettracker.customdata.CustomDataCreateActivity;
 import mad.oamk.pettracker.customdata.CustomDataViewActivity;
@@ -30,6 +35,8 @@ import mad.oamk.pettracker.models.Pet;
 
 public class PetView extends BaseActivity {
 
+    private static final int MENU_EDIT = 21;
+    private static final int MENU_DELETE = 43;
     private TextView nametextview;
     private TextView speciestextview;
     private TextView breedtextview;
@@ -38,8 +45,6 @@ public class PetView extends BaseActivity {
     private DatabaseReference petIdReference;
 
     private ValueEventListener petListener;
-
-    private Pet pet;
 
     private LinkedHashMap<String,Object> buttonsMap = new LinkedHashMap<>();
     private LinkedHashMap<String,Object> defaultButtonsMap = new LinkedHashMap<>();
@@ -50,10 +55,12 @@ public class PetView extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_view);
 
+
+
         //Get pets id from appdata singleton
         petId = AppData.getInstance().getPetId();
 
-        //Set refrence to pets id
+        //Set reference to pets id
         petIdReference = FirebaseDatabase.getInstance().getReference().child("Pets").child(user.getUid()).child("Pets").child(petId);
 
         //Set default buttons and what activity they go
@@ -72,8 +79,9 @@ public class PetView extends BaseActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 //get pet to pet class
-                pet = snapshot.getValue(Pet.class);
+                Pet pet = snapshot.getValue(Pet.class);
                 //set values
+                assert pet != null;
                 setValues(pet);
             }
 
@@ -92,7 +100,7 @@ public class PetView extends BaseActivity {
         //tagtextview = (TextView) findViewById(R.id.tag);
 
 
-
+        // Add custom data field
         ImageButton buttonCustom = (ImageButton) findViewById(R.id.buttonCustom);
         buttonCustom.setOnClickListener(new OnClickListener() {
             @Override
@@ -101,28 +109,10 @@ public class PetView extends BaseActivity {
             }
         });
 
-
+        // Create custom data field buttons
         setButtonRecyclerView();
 
-        // Lemmikin poistaminen DELETE napilla:
-        ImageButton delete_pet = (ImageButton) findViewById(R.id.btnDeletePet);
-        delete_pet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                delete(); // Tämä metodi löytyy hieman alempaa...
-            }
-        });
 
-        // Lemmikin tietojen päivitystä varten avataan oma aktiviteetti:
-        ImageButton update_pet = (ImageButton) findViewById(R.id.btnUpdatePet);
-        update_pet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PetView.this, UpdatePetActivity.class);
-                intent.putExtra("PetId", petId);
-                startActivity(intent);
-            }
-        });
     }
 
 
@@ -166,16 +156,21 @@ public class PetView extends BaseActivity {
 
     private void setValues(Pet pet) {
         //Set values to the textviews:
-        nametextview.setText(pet.getName());
+        String name = pet.getName();
+        //Set title to pets name
+        Objects.requireNonNull(getSupportActionBar()).setTitle(name);
+        nametextview.setText(name);
         speciestextview.setText(pet.getSpecies());
         breedtextview.setText(pet.getBreed());
         dateOfBirthtextview.setText(pet.getDateOfBirth());
+        String image = pet.getPhotoUrl();
+        if(image != null){
+            ImageView imageView = (ImageView) findViewById(R.id.petViewImage);
+            Glide.with(this).load(image).into(imageView);
+        }
     }
 
-    public void moveToWeight() {
-        //Intent intent = new Intent(this, WeightActivity.class);
-        //startActivity(intent);
-    }
+
 
     public void moveToCustom() {
         Intent intentcustom = new Intent(this, CustomDataCreateActivity.class);
@@ -202,6 +197,32 @@ public class PetView extends BaseActivity {
             }
         });
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        menu.add(0, MENU_EDIT, Menu.NONE, getString(R.string.menu_action_update)).setIcon(R.drawable.ic_action_update).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        menu.add(0, MENU_DELETE, Menu.NONE, getString(R.string.menu_action_delete)).setIcon(R.drawable.ic_action_delete).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case MENU_EDIT:
+                Intent intent = new Intent(PetView.this, UpdatePetActivity.class);
+                intent.putExtra("PetId", petId);
+                startActivity(intent);
+                break;
+            case MENU_DELETE:
+                delete();
+                break;
+        }
+        return false;
     }
 
 }

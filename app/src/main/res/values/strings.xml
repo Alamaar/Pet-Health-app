@@ -2,6 +2,8 @@
     <string name="app_name">Pet Tracker</string>
     <string name="Sign_Out">Sign out</string>
     <string name="Language">Change to Finnish</string>
+    <string name="menu_action_update">Update</string>
+    <string name="menu_action_delete">Delete</string>
 
     <string-array name="pet_names">
         <item>Lemmikki1</item>
