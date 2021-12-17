@@ -89,8 +89,8 @@ public class PetView extends AppCompatActivity {
         defaultButtonsMap.put(String.valueOf(R.string.weight), WeightActivity.class);
         defaultButtonsMap.put(String.valueOf(R.string.health), null);
         defaultButtonsMap.put(String.valueOf(R.string.activity), Activities_activity.class);
-        defaultButtonsMap.put(String.valueOf(R.string.feeding)"Ruokinta", Feeding_activity.class);
-        defaultButtonsMap.put(String.valueOf(R.string.pictures)"Kuvat", null);
+        defaultButtonsMap.put(String.valueOf(R.string.feeding), Feeding_activity.class);
+        defaultButtonsMap.put(String.valueOf(R.string.pictures), null);
 
         setButtonRecyclerView();
 
