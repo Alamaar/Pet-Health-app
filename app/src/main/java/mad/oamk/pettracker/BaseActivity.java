@@ -3,7 +3,10 @@ package mad.oamk.pettracker;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,11 +14,14 @@ import android.view.MenuItem;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Locale;
+
 public class BaseActivity extends AppCompatActivity {
 
 
     protected FirebaseUser user;
     protected String petId;
+    protected String userID;
 
 
     @Override
@@ -37,6 +43,7 @@ public class BaseActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
+        userID = user.getUid();
 
 
 
@@ -60,7 +67,12 @@ public class BaseActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.menu_change_language:
-                    //TODO kieliasetuksen vaihtaminen
+                if(Locale.getDefault() == new Locale("en")){
+                    setLocale(this, "fi");
+                }
+                else {
+                    setLocale(this,"en" );
+                }
                 return true;
             case R.id.home:
                 Intent homeIntent = new Intent(this, MainActivity.class);
@@ -70,4 +82,15 @@ public class BaseActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    public static void setLocale(Activity activity, String languageCode) {
+        Locale locale = new Locale(languageCode);
+        Locale.setDefault(locale);
+        Resources resources = activity.getResources();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+    }
+
+
 }

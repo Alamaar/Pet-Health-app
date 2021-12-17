@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.common.internal.ImagesContract;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -68,7 +69,7 @@ public class PetView extends BaseActivity {
         defaultButtonsMap.put("Terveystiedot", null);
         defaultButtonsMap.put("Ulkoilu", Activities_activity.class);
         defaultButtonsMap.put("Ruokinta", Feeding_activity.class);
-        defaultButtonsMap.put("Kuvat", null);
+        defaultButtonsMap.put("Kuvat", ImagesActivity.class);
 
         setButtonRecyclerView();
 
