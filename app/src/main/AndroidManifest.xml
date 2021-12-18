@@ -13,7 +13,6 @@
             android:name=".AddNewActivities"
             android:exported="false" />
         <activity
-            android:name=".Activities_activity"
             android:name=".ImagesActivity"
             android:exported="false" />
         <activity

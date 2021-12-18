@@ -50,6 +50,8 @@
     <string name="date_colon">Päivämäärä:</string>
     <string name="data_field">Tietokenttä</string>
     <string name="textview2">Tekstikenttä2</string>
+    <string name="images">Kuvat</string>
+
 
 
     <string-array name="pet_names">
