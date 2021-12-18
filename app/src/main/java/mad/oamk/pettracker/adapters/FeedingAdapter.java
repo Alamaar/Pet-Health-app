@@ -1,4 +1,4 @@
-package mad.oamk.pettracker;
+package mad.oamk.pettracker.adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -15,12 +15,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
+
+import mad.oamk.pettracker.R;
 
 public class FeedingAdapter extends RecyclerView.Adapter<FeedingAdapter.ViewHolder> {
 

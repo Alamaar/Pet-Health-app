@@ -20,8 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+
+import mad.oamk.pettracker.adapters.FeedingAdapter;
 
 public class Feeding_activity extends AppCompatActivity {
     private RecyclerView recyclerView;
