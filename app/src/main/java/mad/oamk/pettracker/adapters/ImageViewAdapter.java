@@ -1,5 +1,8 @@
 package mad.oamk.pettracker.adapters;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -23,10 +29,12 @@ public class ImageViewAdapter extends RecyclerView.Adapter<ImageViewAdapter.View
     private ArrayList<String> IdList;
     private LinkedHashMap<String,Object> imagesHasMAp;
     private DatabaseReference databaseReference;
-    public ImageViewAdapter(ArrayList<String> idList, LinkedHashMap<String, Object> imagesHasMAp, DatabaseReference databaseReference) {
+    private Context context;
+    public ImageViewAdapter(Context context, ArrayList<String> idList, LinkedHashMap<String, Object> imagesHasMAp, DatabaseReference databaseReference) {
         this.databaseReference = databaseReference;
         this.IdList = idList;
         this.imagesHasMAp = imagesHasMAp;
+        this.context = context;
     }
 
     @NonNull
@@ -46,7 +54,7 @@ public class ImageViewAdapter extends RecyclerView.Adapter<ImageViewAdapter.View
         String key = IdList.get(position);
 
 
-        Map<String,Object> map = (Map<String, Object>) imagesHasMAp.get(key);
+        Map<?,?> map = (Map<?, ?>) imagesHasMAp.get(key);
         if (map == null) {
             return;
         }
@@ -57,7 +65,59 @@ public class ImageViewAdapter extends RecyclerView.Adapter<ImageViewAdapter.View
         Glide.with(holder.itemView).load(imageUrl).into(holder.imageView);
 
 
-        //todo poisto
+
+        //Create dialog on long press to confirm removing the data from given position.
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Delete?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                int position = holder.getAdapterPosition();
+                                String key = IdList.get(position);
+
+
+                                Map<?,?> map = (Map<?, ?>) imagesHasMAp.get(key);
+                                if (map == null) {
+                                    return;
+                                }
+
+                                String imageUrl = (String) map.get("ImageUrl");
+
+                                FirebaseStorage storage = FirebaseStorage.getInstance();
+                                StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
+                                storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        DatabaseReference idReference = databaseReference.child(key);
+                                        idReference.removeValue();
+
+                                    }
+                                });
+
+
+
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+
+                AlertDialog dialog = builder.create();
+
+
+                dialog.show();
+                return true;
+            };
+        });
+
 
 
 

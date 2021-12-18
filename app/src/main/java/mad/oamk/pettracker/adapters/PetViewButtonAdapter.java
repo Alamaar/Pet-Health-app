@@ -1,4 +1,4 @@
-package mad.oamk.pettracker;
+package mad.oamk.pettracker.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +19,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Map;
+
+import mad.oamk.pettracker.AppData;
+import mad.oamk.pettracker.R;
 
 
 public class PetViewButtonAdapter  extends RecyclerView.Adapter<PetViewButtonAdapter.ViewHolder> {

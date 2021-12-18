@@ -41,9 +41,6 @@
             android:name=".AddPetActivity"
             android:exported="false" />
         <activity
-            android:name=".DbTestingActivity"
-            android:exported="false" />
-        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity

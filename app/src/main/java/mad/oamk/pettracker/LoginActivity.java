@@ -87,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent signInIntent = AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
+                .setTheme(R.style.Theme_PetTracker)
                 .build();
         signInLauncher.launch(signInIntent);
     }

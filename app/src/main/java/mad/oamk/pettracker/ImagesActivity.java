@@ -59,7 +59,7 @@ public class ImagesActivity extends BaseActivity {
 
 
         //Recyclerview adapter
-        ImageViewAdapter adapter = new ImageViewAdapter(IdList,imagesHasMAp,databaseReference);
+        ImageViewAdapter adapter = new ImageViewAdapter(this, IdList,imagesHasMAp,databaseReference);
 
         //Initialize recyclerview
         RecyclerView recyclerView = findViewById(R.id.images_view_recyclerView);
@@ -168,13 +168,17 @@ public class ImagesActivity extends BaseActivity {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String key = snapshot.getKey();
+                int position = IdList.indexOf(key);
 
+                adapter.notifyItemChanged(position);
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
                 String key = snapshot.getKey();
                 int position = IdList.indexOf(key);
+                IdList.remove(position);
 
                 adapter.notifyItemRemoved(position);
             }
