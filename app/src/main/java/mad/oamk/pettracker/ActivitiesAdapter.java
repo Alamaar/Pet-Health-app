@@ -5,7 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,21 +26,24 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
     private DatabaseReference databaseReference;
 
     public ActivitiesAdapter(Context context, ArrayList<String> dataIDs, DatabaseReference dataReference) {
-
+        this.dataIDs = dataIDs;
+        this.context = context;
+        this.databaseReference = dataReference;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ActivitiesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.acvitities_list, parent, false);
+                .inflate(R.layout.activities_list, parent, false);
 
         return new ActivitiesAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ActivitiesAdapter.ViewHolder holder, int position) {
 
+        //position = holder.getAdapterPosition();
         //From customdata id get the id referring to viewholder in this position
         DatabaseReference idReference  = databaseReference.child(dataIDs.get(holder.getAdapterPosition()));
 
@@ -56,7 +59,13 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
                 //Get data in reference
                 Map<String,Object> data =  (Map<String, Object>) task.getResult().getValue();
 
-                String datas = (String) data.get("test");
+                String date = (String) data.get("date");
+                String type = (String) data.get("type");
+                String length = (String) data.get("length");
+
+                holder.textviewDate.setText(date);
+                holder.textviewType.setText(type);
+                holder.textviewLength.setText(length);
 
 
             }
@@ -81,11 +90,17 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        private TextView textviewDate;
+        private TextView textviewType;
+        private TextView textviewLength;
+
         //private TexView textField;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            textviewDate = itemView.findViewById(R.id.activitiesDate);
+            textviewType = itemView.findViewById(R.id.activitiesType);
+            textviewLength = itemView.findViewById(R.id.activitiesLength);
 
 
         }

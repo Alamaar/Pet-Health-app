@@ -3,9 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/activities_list.xml" value="0.25" />
+        <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/activity_activities.xml" value="0.33" />
+        <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/activity_acvitites.xml" value="0.36666666666666664" />
+        <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/activity_add_activities.xml" value="0.2" />
         <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/activity_add_pet.xml" value="0.1762917933130699" />
+        <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/activity_pet_view.xml" value="0.2" />
         <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/activity_update_pet.xml" value="0.1762917933130699" />
+        <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/activity_weight_view.xml" value="0.36666666666666664" />
+        <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/acvitities_list.xml" value="0.36666666666666664" />
+        <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/pet_view_button.xml" value="0.13804457953394123" />
+        <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/weight_list.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/drawable-anydpi/ic_action_pets.xml" value="0.33177083333333335" />
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/drawable/btn_background.xml" value="0.32916666666666666" />
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/activity_acvitites.xml" value="0.5234375" />
