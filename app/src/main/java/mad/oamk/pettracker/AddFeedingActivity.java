@@ -64,7 +64,7 @@ public class AddFeedingActivity extends AppCompatActivity {
 
         // Kaikkien kenttien pitää olla täytettynä:
         if(edittext1.getText().length() == 0  || edittext2.getText().length() == 0 || edittext3.getText().length() == 0) {
-            Toast toast = Toast.makeText(this, "Fill in the required fields.", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, getString(R.string.fill_in_the_required_fields), Toast.LENGTH_LONG);
             toast.show();
         }
         else {
@@ -81,7 +81,7 @@ public class AddFeedingActivity extends AppCompatActivity {
             DatabaseReference ref = dataReference.push();
             ref.setValue(foodmap);
 
-            Toast toast = Toast.makeText(this, "New feeding added.",Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, getString(R.string.new_feeding_added),Toast.LENGTH_LONG);
             toast.show();
             finish();
         }

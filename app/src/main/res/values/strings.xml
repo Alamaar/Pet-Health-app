@@ -51,7 +51,17 @@
     <string name="data_field">Data field</string>
     <string name="textview2">TextView2</string>
     <string name="images">Images</string>
-
+    <string name="new_feeding_added">New feeding added</string>
+    <string name="new_activity_added">New activity added</string>
+    <string name="type">Type</string>
+    <string name="duration">Duration</string>
+    <string name="enter_new_activity">Enter new activity:</string>
+    <string name="length_minutes">Length (minutes)</string>
+    <string name="add_new_activity">Add new activity</string>
+    <string name="add_new_feeding_to_your_pet">Add new feeding to your pet:</string>
+    <string name="time">Time</string>
+    <string name="food">Food</string>
+    <string name="send_new_food">Send new food</string>
 
 
     <string-array name="pet_names">

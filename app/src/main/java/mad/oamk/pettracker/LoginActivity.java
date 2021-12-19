@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         if (firebaseuser == null) {
-            loginButton.setText(getString(R.string.sign_in)); //TODO move to string recourses
+            loginButton.setText(getString(R.string.sign_in));
             loginTextView.setText(getString(R.string.sign_in));
 
             loginButton.setOnClickListener(new View.OnClickListener() {

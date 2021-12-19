@@ -51,6 +51,17 @@
     <string name="data_field">Tietokenttä</string>
     <string name="textview2">Tekstikenttä2</string>
     <string name="images">Kuvat</string>
+    <string name="new_feeding_added">Uusi ruokinta lisätty</string>
+    <string name="new_activity_added">Uusi aktiviteetti lisätty</string>
+    <string name="type">Tyyppi</string>
+    <string name="duration">Kesto</string>
+    <string name="enter_new_activity">Lisää uusi aktiviteetti:</string>
+    <string name="length_minutes">Kesto (minuuteissa)</string>
+    <string name="add_new_activity">Lisää uusi aktiviteetti</string>
+    <string name="add_new_feeding_to_your_pet">Lisää lemmikillesi uuri ruokinta:</string>
+    <string name="time">Aika</string>
+    <string name="food">Ruoka</string>
+    <string name="send_new_food">Lähetä uusi ruoka</string>
 
 
 
