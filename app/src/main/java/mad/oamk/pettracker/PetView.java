@@ -64,7 +64,6 @@ public class PetView extends BaseActivity {
 
         //Set default buttons and what activity they go
         defaultButtonsMap.put(getString(R.string.weight), WeightActivity.class);
-        defaultButtonsMap.put(getString(R.string.health), null);
         defaultButtonsMap.put(getString(R.string.activity), Activities_activity.class);
         defaultButtonsMap.put(getString(R.string.feeding), Feeding_activity.class);
         defaultButtonsMap.put(getString(R.string.pictures), ImagesActivity.class);

@@ -42,8 +42,12 @@ public class BaseActivity extends AppCompatActivity {
             // Not signed in, launch the Sign In activity
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+            finish();
+            return;
         }
-        userID = user.getUid();
+        else{
+            userID = user.getUid();
+        }
 
 
 

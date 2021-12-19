@@ -71,7 +71,7 @@ public class PetViewButtonAdapter  extends RecyclerView.Adapter<PetViewButtonAda
                 context.startActivity(intent);
             }
         });
-        if(position > 5) { //default button number?? oiskohan parempaa tapaa
+        if(position > 4) {
             //Build database reference
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String petId = AppData.getInstance().getPetId();
