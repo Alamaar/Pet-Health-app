@@ -14,7 +14,8 @@
             android:exported="false" />
         <activity
             android:name=".ImagesActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".PetView" />
         <activity
             android:name=".BaseActivity"
             android:exported="false" />
