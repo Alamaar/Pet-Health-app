@@ -1,18 +1,14 @@
 package mad.oamk.pettracker;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,18 +18,15 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+import mad.oamk.pettracker.adapters.PetItemViewAdapter;
+
+public class MainActivity extends BaseActivity {
 
     RecyclerView recyclerView;
 
-    String s1[];
 
     private List<String> petIdKeyList = new ArrayList<String>();
 
-    private DatabaseReference baseRefrence;
-    private FirebaseUser user;
-
-    int defaultImage = R.drawable.ic_action_pets;
 
 
     @Override
@@ -41,17 +34,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Delete back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
-        // Initialize Firebase and check if the user is signed in
-         user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null) {
-            // Not signed in, launch the Sign In activity
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-        }
 
-        baseRefrence = FirebaseDatabase.getInstance().getReference().child("Pets").child(user.getUid()).child("Pets");
-
+        DatabaseReference baseRefrence = FirebaseDatabase.getInstance().getReference().child("Pets").child(user.getUid()).child("Pets");
 
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -59,11 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
         //TODO lemmikkien nimien hakeminen firebasesta ja tallentaminen s1:een
 
-        MyAdapter myAdapter = new MyAdapter(this, petIdKeyList, defaultImage,  baseRefrence);
-        recyclerView.setAdapter(myAdapter);
+        PetItemViewAdapter adapter = new PetItemViewAdapter(this, petIdKeyList, R.drawable.ic_action_pets, baseRefrence);
+        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
 
 
 
@@ -84,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
                 petIdKeyList.addAll(newPetIdKeyList);
 
-                myAdapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
 
 
             }
@@ -98,27 +83,6 @@ public class MainActivity extends AppCompatActivity {
         baseRefrence.addValueEventListener(petListListener);
 
 
-
-        //TODO siirtäminen menuun
-        //Sign out button
-        Button signOutButton = (Button) findViewById(R.id.sign_out_button);
-        signOutButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-        //TODO Voidaan poistaa myöhemmässä vaiheessa
-        //Test activity button
-        //Button testing_activity = (Button) findViewById(R.id.test_activity_button);
-        /*testing_activity.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, DbTestingActivity.class);
-                startActivity(intent);
-            }
-        });*/
         // Avataan lemmikinlisäysikkuna:
         ImageButton add_pet_activity = (ImageButton) findViewById(R.id.btnAddPet);
         add_pet_activity.setOnClickListener(new View.OnClickListener(){

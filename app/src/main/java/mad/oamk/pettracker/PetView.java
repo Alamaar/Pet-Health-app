@@ -1,109 +1,86 @@
 package mad.oamk.pettracker;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.ImageButton;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.Objects;
 
+import mad.oamk.pettracker.adapters.PetViewButtonAdapter;
 import mad.oamk.pettracker.customdata.CustomDataCreateActivity;
 import mad.oamk.pettracker.customdata.CustomDataViewActivity;
 import mad.oamk.pettracker.models.Pet;
 
-public class PetView extends AppCompatActivity {
+public class PetView extends BaseActivity {
 
+    private static final int MENU_EDIT = 21;
+    private static final int MENU_DELETE = 43;
     private TextView nametextview;
     private TextView speciestextview;
     private TextView breedtextview;
     private TextView dateOfBirthtextview;
-    private TextView tagtextview;
-    private Button btnweight;
-    private Button btnhealthness;
-    private Button btnactivities;
-    private Button btnfeed;
-    private Button btnimages;
-    private Button btnother;
 
-
-    private DatabaseReference petIdRefrence;
-
-    private String petId;
-
-    private FirebaseUser user;
+    private DatabaseReference petIdReference;
 
     private ValueEventListener petListener;
-
-    private Pet pet;
 
     private LinkedHashMap<String,Object> buttonsMap = new LinkedHashMap<>();
     private LinkedHashMap<String,Object> defaultButtonsMap = new LinkedHashMap<>();
 
-
-    //TODO recyclerview nappeja näyttämään.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_view);
 
+
+
         //Get pets id from appdata singleton
         petId = AppData.getInstance().getPetId();
 
-
-        //Get curren user from firebase instance
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null) {
-            // Not signed in, launch the Sign In activity
-            Intent loginIntent = new Intent(this, LoginActivity.class);
-            startActivity(loginIntent);
-        }
-        //Set refrence to pets id
-        petIdRefrence = FirebaseDatabase.getInstance().getReference().child("Pets").child(user.getUid()).child("Pets").child(petId);
+        //Set reference to pets id
+        petIdReference = FirebaseDatabase.getInstance().getReference().child("Pets").child(user.getUid()).child("Pets").child(petId);
 
         //Set default buttons and what activity they go
-        defaultButtonsMap.put("Paino", WeightActivity.class);
-        defaultButtonsMap.put("Terveystiedot", null);
-        defaultButtonsMap.put("Ulkoilu", Activities_activity.class);
-        defaultButtonsMap.put("Ruokinta", Feeding_activity.class);
-        defaultButtonsMap.put("Kuvat", null);
+        defaultButtonsMap.put(getString(R.string.weight), WeightActivity.class);
+        defaultButtonsMap.put(getString(R.string.activity), Activities_activity.class);
+        defaultButtonsMap.put(getString(R.string.feeding), Feeding_activity.class);
+        defaultButtonsMap.put(getString(R.string.pictures), ImagesActivity.class);
 
         setButtonRecyclerView();
 
 
-        // Event lisener to pet id to lissen all changes
+        //Get pets info
         petListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 //get pet to pet class
-                pet = snapshot.getValue(Pet.class);
+                Pet pet = snapshot.getValue(Pet.class);
                 //set values
-                setValues();
+                assert pet != null;
+                setValues(pet);
             }
 
             @Override
@@ -112,8 +89,7 @@ public class PetView extends AppCompatActivity {
             }
         };
 
-        petIdRefrence.addValueEventListener(petListener);
-        //petIdRefrence.removeEventListener(petListener); //?????
+        petIdReference.addListenerForSingleValueEvent(petListener);
 
         nametextview = (TextView) findViewById(R.id.name);
         speciestextview = (TextView) findViewById(R.id.species);
@@ -121,17 +97,8 @@ public class PetView extends AppCompatActivity {
         dateOfBirthtextview = (TextView) findViewById(R.id.dateOfBirth);
         //tagtextview = (TextView) findViewById(R.id.tag);
 
-        /*Button btnweight = (Button) findViewById(R.id.weight);
-        btnweight.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //moveToWeight();
-            }
-        });
 
-
-         */
-
+        // Add custom data field
         ImageButton buttonCustom = (ImageButton) findViewById(R.id.buttonCustom);
         buttonCustom.setOnClickListener(new OnClickListener() {
             @Override
@@ -140,65 +107,10 @@ public class PetView extends AppCompatActivity {
             }
         });
 
-
-
-        /*Button btnhealthness = (Button) findViewById(R.id.healthness);
-        btnhealthness.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                moveToHealthness();
-            }
-        });
-        Button btnactivities = (Button) findViewById(R.id.activities);
-        btnactivities.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                moveToActivities();
-            }
-        });
-        Button btnfeed = (Button) findViewById(R.id.feed);
-        btnfeed.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                moveToFeed();
-            }
-        });
-        Button btnimages = (Button) findViewById(R.id.images);
-        btnimages.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                moveToImages();
-            }
-        });
-        Button btnother = (Button) findViewById(R.id.other);
-        btnother.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                moveToOther();
-            }
-        });*/
-
+        // Create custom data field buttons
         setButtonRecyclerView();
 
-        // Lemmikin poistaminen DELETE napilla:
-        ImageButton delete_pet = (ImageButton) findViewById(R.id.btnDeletePet);
-        delete_pet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                delete(); // Tämä metodi löytyy hieman alempaa...
-            }
-        });
 
-        // Lemmikin tietojen päivitystä varten avataan oma aktiviteetti:
-        ImageButton update_pet = (ImageButton) findViewById(R.id.btnUpdatePet);
-        update_pet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PetView.this, UpdatePetActivity.class);
-                intent.putExtra("PetId", petId);
-                startActivity(intent);
-            }
-        });
     }
 
 
@@ -237,22 +149,26 @@ public class PetView extends AppCompatActivity {
             }
         };
 
-        petIdRefrence.child("CustomData").addValueEventListener(customDataEntryListener);
+        petIdReference.child("CustomData").addValueEventListener(customDataEntryListener);
     }
 
-    private void setValues() {
+    private void setValues(Pet pet) {
         //Set values to the textviews:
-        nametextview.setText(pet.getName());
+        String name = pet.getName();
+        //Set title to pets name
+        Objects.requireNonNull(getSupportActionBar()).setTitle(name);
+        nametextview.setText(name);
         speciestextview.setText(pet.getSpecies());
         breedtextview.setText(pet.getBreed());
         dateOfBirthtextview.setText(pet.getDateOfBirth());
-
+        String image = pet.getPhotoUrl();
+        if(image != null){
+            ImageView imageView = (ImageView) findViewById(R.id.petViewImage);
+            Glide.with(this).load(image).into(imageView);
+        }
     }
 
-    public void moveToWeight() {
-        //Intent intent = new Intent(this, WeightActivity.class);
-        //startActivity(intent);
-    }
+
 
     public void moveToCustom() {
         Intent intentcustom = new Intent(this, CustomDataCreateActivity.class);
@@ -263,50 +179,49 @@ public class PetView extends AppCompatActivity {
 
 
     public void delete(){
-        petIdRefrence.removeEventListener(petListener);
+        petIdReference.removeEventListener(petListener);
         // Poistaa tietyn lemmikin ID:n perusteella:
-        DatabaseReference petsref = petIdRefrence;
+        DatabaseReference petsref = petIdReference;
         petsref.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(PetView.this, "Succesfully deleted.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PetView.this, getString(R.string.succesfully_deleted), Toast.LENGTH_SHORT).show();
                     PetView.this.finish();
                 }
                 else {
-                    Toast.makeText(PetView.this, "Failed.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PetView.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        menu.add(0, MENU_EDIT, Menu.NONE, getString(R.string.menu_action_update)).setIcon(R.drawable.ic_action_update).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        menu.add(0, MENU_DELETE, Menu.NONE, getString(R.string.menu_action_delete)).setIcon(R.drawable.ic_action_delete).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case MENU_EDIT:
+                Intent intent = new Intent(PetView.this, UpdatePetActivity.class);
+                intent.putExtra("PetId", petId);
+                startActivity(intent);
+                break;
+            case MENU_DELETE:
+                delete();
+                break;
+        }
+        return false;
+    }
+
 }
 
-/*
-    public void moveToHealthness() {
-        Intent intent = new Intent(this, HealthnessActivity.class);
-        startActivity(intent);
-    }
-
-    public void moveToActivities() {
-        Intent intent = new Intent(this, ActivitiesActivity.class);
-        startActivity(intent);
-    }
-
-    public void moveToFeed() {
-        Intent intent = new Intent(this, FeedActivity.class);
-        startActivity(intent);
-    }
-
-    public void moveToImages() {
-        Intent intent = new Intent(this, ImagesActivity.class);
-        startActivity(intent);
-    }
-
-    public void moveToOther() {
-        Intent intent = new Intent(this, OtherActivity.class);
-        startActivity(intent);
-    }
-}
-*/

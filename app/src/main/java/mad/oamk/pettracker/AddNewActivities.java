@@ -63,7 +63,7 @@ public class AddNewActivities extends AppCompatActivity {
 
         // Kaikkien kenttien pitää olla täytettynä:
         if(edittext1.getText().length() == 0  || edittext2.getText().length() == 0 || edittext3.getText().length() == 0) {
-            Toast toast = Toast.makeText(this, "Fill in the required fields.", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, getString(R.string.fill_in_the_required_fields), Toast.LENGTH_LONG);
             toast.show();
         }
         else {
@@ -80,7 +80,7 @@ public class AddNewActivities extends AppCompatActivity {
             DatabaseReference ref = petsref.push();
             ref.setValue(activitymap);
 
-            Toast toast = Toast.makeText(this, "New activity added.",Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, getString(R.string.new_activity_added),Toast.LENGTH_LONG);
             toast.show();
             finish();
         }

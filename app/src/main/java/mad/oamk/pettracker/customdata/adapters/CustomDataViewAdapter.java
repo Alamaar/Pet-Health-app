@@ -177,6 +177,10 @@ public class CustomDataViewAdapter  extends RecyclerView.Adapter<CustomDataViewA
 
            linearLayout =  itemView.findViewById(R.id.linearLayout);
         }
+
+        public ViewHolder(View view) {
+            super(view);
+        }
     }
 
 

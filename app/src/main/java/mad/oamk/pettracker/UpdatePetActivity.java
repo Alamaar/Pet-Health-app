@@ -109,7 +109,7 @@ public class UpdatePetActivity extends AppCompatActivity {
 
         // Kaikkien kenttien pitää olla täytettynä joko uusilla tai vanhoilla tiedoilla:
         if(editText1.getText().length() == 0  || editText2.getText().length() == 0 || editText3.getText().length() == 0 || editText4.getText().length() == 0) {
-            Toast toast = Toast.makeText(this, "Fill in the required fields.",Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, getString(R.string.fill_in_the_required_fields),Toast.LENGTH_LONG);
             toast.show();
         }
         // Uudet tiedot päivitetään firebaseen:
@@ -125,7 +125,7 @@ public class UpdatePetActivity extends AppCompatActivity {
 
             petsref.updateChildren(map);
 
-            Toast toast = Toast.makeText(this, "Pet's information updated.",Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, getString(R.string.pet_information_updated),Toast.LENGTH_LONG);
             toast.show();
 
             UpdatePetActivity.this.finish();

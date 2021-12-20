@@ -1,4 +1,4 @@
-package mad.oamk.pettracker;
+package mad.oamk.pettracker.adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -17,6 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 import java.util.Map;
+
+import mad.oamk.pettracker.R;
 
 
 public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.ViewHolder> {

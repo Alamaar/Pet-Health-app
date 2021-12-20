@@ -1,4 +1,4 @@
-package mad.oamk.pettracker;
+package mad.oamk.pettracker.adapters;
 
 
 import android.content.Context;
@@ -11,7 +11,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -23,12 +22,14 @@ import com.google.firebase.database.DatabaseReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import mad.oamk.pettracker.AppData;
+import mad.oamk.pettracker.PetView;
+import mad.oamk.pettracker.R;
 import mad.oamk.pettracker.models.Pet;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class PetItemViewAdapter extends RecyclerView.Adapter<PetItemViewAdapter.MyViewHolder> {
 
-    String data1[];
-    int image;
+    int defaultImage;
     private Context context;
 
     //Array list to contain all pet id's
@@ -37,10 +38,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     private DatabaseReference baseRefrence;
 
-    public MyAdapter(Context ct, List<String> petIdKeyList, int img, DatabaseReference petRefrence) {
+    public PetItemViewAdapter(Context ct, List<String> petIdKeyList, int img, DatabaseReference petRefrence) {
         this.petIdKeyList = petIdKeyList;
         //data1 = s1;
-        image = img;
+        defaultImage = img;
         context = ct;
         baseRefrence = petRefrence;
     }
@@ -66,7 +67,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
                 String petId = petIdKeyList.get(position);
                 Context context = view.getContext();
-                Intent intent = new Intent(context,PetView.class);
+                Intent intent = new Intent(context, PetView.class);
                 //sets pet id to clicked pets id
                 AppData.getInstance().setPetId(petId);
                 context.startActivity(intent);
@@ -85,9 +86,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                     Pet pet = task.getResult().getValue(Pet.class);
 
                     String name = pet.getName();
-                    String imageUrl = pet.getPhotoUrl();
                     holder.myText1.setText(name);
-                    Glide.with(holder.itemView).load(imageUrl).into(holder.myImage);
+
+                    String imageUrl = pet.getPhotoUrl();
+                    if (imageUrl != null) {
+                        Glide.with(holder.itemView).load(imageUrl).into(holder.myImage);
+                    }
+                    else {
+
+                        holder.myImage.setImageResource(defaultImage);
+                    }
 
 
                 }

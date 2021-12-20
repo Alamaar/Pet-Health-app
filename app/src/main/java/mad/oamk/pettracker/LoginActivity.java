@@ -52,8 +52,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
         if (firebaseuser == null) {
-            loginButton.setText("Sign in"); //TODO move to string recourses
-            loginTextView.setText("Sign in");
+            loginButton.setText(getString(R.string.sign_in));
+            loginTextView.setText(getString(R.string.sign_in));
 
             loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -63,9 +63,9 @@ public class LoginActivity extends AppCompatActivity {
             });
         }
         else {
-            loginButton.setText("Sign out");
+            loginButton.setText(getString(R.string.sign_out));
 
-            String text = "Signed in as :";
+            String text = getString(R.string.signed_in_ass);
             String username = firebaseuser.getDisplayName().toString();
             text = text + username;
 
@@ -87,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent signInIntent = AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
+                .setTheme(R.style.Theme_PetTracker)
                 .build();
         signInLauncher.launch(signInIntent);
     }
@@ -101,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else {
-            Toast toast = Toast.makeText(this, "Sign in failed",Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, getString(R.string.sign_in_failed),Toast.LENGTH_LONG);
             toast.show();
             //TODO
             // Sign in failed. If response is null the user canceled the

@@ -3,22 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/activities_list.xml" value="0.25" />
-        <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/activity_activities.xml" value="0.33" />
-        <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/activity_acvitites.xml" value="0.36666666666666664" />
-        <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/activity_add_activities.xml" value="0.2" />
         <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/activity_add_pet.xml" value="0.1762917933130699" />
-        <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/activity_pet_view.xml" value="0.2" />
         <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/activity_update_pet.xml" value="0.1762917933130699" />
-        <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/activity_weight_view.xml" value="0.36666666666666664" />
-        <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/acvitities_list.xml" value="0.36666666666666664" />
-        <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/pet_view_button.xml" value="0.13804457953394123" />
-        <entry key="..\:/MAD-project/MAD-Project/app/src/main/res/layout/weight_list.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/drawable-anydpi/ic_action_pets.xml" value="0.33177083333333335" />
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/drawable/btn_background.xml" value="0.32916666666666666" />
+        <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/drawable/ic_action_login.xml" value="0.20555555555555555" />
+        <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/drawable/ic_login_background.xml" value="0.20555555555555555" />
+        <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/drawable/ic_login_foreground.xml" value="0.20555555555555555" />
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/activity_acvitites.xml" value="0.5234375" />
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/activity_add_pet.xml" value="0.3125" />
+        <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/activity_base.xml" value="0.5234375" />
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/activity_custom_data.xml" value="0.31145833333333334" />
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/activity_custom_data_add.xml" value="0.67" />
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/activity_custom_data_add2.xml" value="0.3692708333333333" />
@@ -27,8 +22,9 @@
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/activity_db_testing.xml" value="0.33" />
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/activity_feeding.xml" value="0.5234375" />
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/activity_firebase_ui.xml" value="0.30625" />
+        <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/activity_images.xml" value="0.1" />
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/activity_main.xml" value="0.31145833333333334" />
-        <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/activity_pet_view.xml" value="0.5234375" />
+        <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/activity_pet_view.xml" value="0.46613545816733065" />
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/activity_sign_in.xml" value="0.30625" />
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/activity_sign_out.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/activity_update_pet.xml" value="0.30885416666666665" />
@@ -39,8 +35,45 @@
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/custom_data_view_list.xml" value="0.3692708333333333" />
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/custom_data_view_list_field.xml" value="0.67" />
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/feeding_list.xml" value="0.5234375" />
+        <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/images_list_view.xml" value="0.1" />
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/my_button.xml" value="0.75" />
         <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/layout/pet_view_button.xml" value="0.5234375" />
+        <entry key="..\:/Users/Koulu/Prokekti/MAD-Project/app/src/main/res/menu/menu.xml" value="0.5234375" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/drawable-anydpi/ic_action_add.xml" value="0.11851851851851852" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/drawable-anydpi/ic_action_delete.xml" value="0.11851851851851852" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/drawable-anydpi/ic_action_pets.xml" value="0.11851851851851852" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/drawable-anydpi/ic_action_update.xml" value="0.11851851851851852" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.11851851851851852" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/activities_list.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/activity_activities.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/activity_acvitites.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/activity_add_activities.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/activity_add_feeding.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/activity_add_pet.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/activity_add_weight_data.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/activity_custom_data_add.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/activity_custom_data_create.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/activity_custom_data_view.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/activity_db_testing.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/activity_feeding.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/activity_images.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/activity_main.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/activity_pet_view.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/activity_sign_in.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/activity_update_pet.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/activity_weight_view.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/acvitities_list.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/custom_data_add.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/custom_data_create_list_view.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/custom_data_view_list.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/custom_data_view_list_field.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/feeding_list.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/images_list_view.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/my_button.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/pet_view_button.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/layout/weight_list.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/menu/menu.xml" value="0.1546875" />
+        <entry key="..\:/Users/OMISTAJA/Desktop/Syksy2021/Projekti/git/MAD-Project/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.11851851851851852" />
       </map>
     </option>
   </component>

@@ -24,12 +24,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mad.oamk.pettracker.AppData;
+import mad.oamk.pettracker.BaseActivity;
 import mad.oamk.pettracker.LoginActivity;
 import mad.oamk.pettracker.PetView;
 import mad.oamk.pettracker.R;
 import mad.oamk.pettracker.customdata.adapters.CustomDataViewAdapter;
 
-public class CustomDataViewActivity extends AppCompatActivity {
+public class CustomDataViewActivity extends BaseActivity {
 
 
     private String header;
@@ -61,20 +62,10 @@ public class CustomDataViewActivity extends AppCompatActivity {
         AppData appData = AppData.getInstance();
         header = appData.getDataHeader();
         petId = appData.getPetId();
-        /*Intent intent = getIntent();
-        petId = intent.getStringExtra("PetId");
-        header = intent.getStringExtra("dataHeader"); //get header from cu
-        //check contents???*/
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null) {
-            // Not signed in, launch the Sign In activity
-            Intent loginintent = new Intent(this, LoginActivity.class);
-            startActivity(loginintent);
-        }
         //Create path to custom datas reference
         customDataRefrence = FirebaseDatabase.getInstance().getReference();
-        customDataRefrence = customDataRefrence.child("Pets").child(user.getUid()).child("Pets").child(petId);
+        customDataRefrence = customDataRefrence.child("Pets").child(userID).child("Pets").child(petId);
         customDataRefrence = customDataRefrence.child("CustomData").child(header);
 
         //recyclerview adapter

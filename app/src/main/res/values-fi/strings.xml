@@ -1,0 +1,76 @@
+<resources>
+    <string name="app_name">Lemmikkini.fi</string>
+    <string name="weight">PAINO</string>
+    <string name="health">TERVEYS</string>
+    <string name="activity">AKTIIVISUUS</string>
+    <string name="feeding">RUOKINTA</string>
+    <string name="pictures">KUVAT</string>
+    <string name="petID">lemmikinID</string>
+    <string name="succesfully_deleted">Poisto onnistui</string>
+    <string name="failed">Virhe</string>
+    <string name="fill_in_the_required_fields">Täytä vaaditut kentät</string>
+    <string name="new_pet_added">Uusi lemmikki lisätty.</string>
+    <string name="new_wight_added">Uusi paino lisätty.</string>
+    <string name="sign_in">Kirjaudu</string>
+    <string name="sign_out">Kirjaudu ulos</string>
+    <string name="signed_in_ass">Kirjautuneena :</string>
+    <string name="sign_in_failed">Kirjautuminen epäonnistui</string>
+    <string name="delete">Poista?</string>
+    <string name="yes">Kyllä</string>
+    <string name="no">Ei</string>
+    <string name="pet_information_updated">Lemmikin tiedot päivitetty</string>
+    <string name="Sign_Out">Kirjaudu ulos</string>
+    <string name="Language">Käännä englanniksi</string>
+    <string name="menu_action_update">Päivitä</string>
+    <string name="menu_action_delete">Poista</string>
+    <string name="enter_your_pet_s_information">Lisää lemmikin tiedot:</string>
+    <string name="name">Nimi</string>
+    <string name="species">Laji</string>
+    <string name="breed">Rotu</string>
+    <string name="date_of_birth">Syntymäaika (DD-MM-YYYY)</string>
+    <string name="add_pet">Lisää lemmikki</string>
+    <string name="enter_your_pets_weight">Anna lemmikkisi paino:</string>
+    <string name="date">Päivämäärä</string>
+    <string name="weight_small">Paino</string>
+    <string name="send_weight">Lähetä paino</string>
+    <string name="textview">Tekstikenttä</string>
+    <string name="save">Tallenna</string>
+    <string name="set_custom_data">Aseta muita tietoja</string>
+    <string name="header">Otsikko</string>
+    <string name="add_field">Lisää kenttä</string>
+    <string name="add_field_names">Lisää kentän nimi</string>
+    <string name="add">LISÄÄ</string>
+    <string name="delete_caps">POISTA</string>
+    <string name="add_weight_caps">LISÄÄ paino</string>
+    <string name="date_of_birth_noDDMMYYY">Syntymäaika</string>
+    <string name="button">Nappi</string>
+    <string name="update_your_pet_s_information">Päivitä lemmikkisi tiedot:</string>
+    <string name="update_information">Päivitä tiedot</string>
+    <string name="weight_colon">Paino:</string>
+    <string name="date_colon">Päivämäärä:</string>
+    <string name="data_field">Tietokenttä</string>
+    <string name="textview2">Tekstikenttä2</string>
+    <string name="images">Kuvat</string>
+    <string name="new_feeding_added">Uusi ruokinta lisätty</string>
+    <string name="new_activity_added">Uusi aktiviteetti lisätty</string>
+    <string name="type">Tyyppi</string>
+    <string name="duration">Kesto</string>
+    <string name="enter_new_activity">Lisää uusi aktiviteetti:</string>
+    <string name="length_minutes">Kesto (minuuteissa)</string>
+    <string name="add_new_activity">Lisää uusi aktiviteetti</string>
+    <string name="add_new_feeding_to_your_pet">Lisää lemmikillesi uuri ruokinta:</string>
+    <string name="time">Aika</string>
+    <string name="food">Ruoka</string>
+    <string name="send_new_food">Lähetä uusi ruoka</string>
+
+
+
+    <string-array name="pet_names">
+        <item>Lemmikki1</item>
+        <item>Lemmikki2</item>
+        <item>Lemmikki3</item>
+        <item>Lemmikki4</item>
+        <item>Lemmikki5</item>
+        <item>Lemmikki6</item>
+    </string-array>
+</resources>

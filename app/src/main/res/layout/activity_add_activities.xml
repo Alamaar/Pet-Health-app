@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
-        android:text="Enter new activity:"
+        android:text="@string/enter_new_activity"
         android:textSize="20dp" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -25,7 +25,7 @@
             android:id="@+id/txtDate"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Date" />
+            android:hint="@string/date" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -38,7 +38,7 @@
             android:id="@+id/txtType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Type" />
+            android:hint="@string/type" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -51,7 +51,7 @@
             android:id="@+id/txtLength"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Length (minutes)" />
+            android:hint="@string/length_minutes" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -61,7 +61,7 @@
         android:layout_gravity="center"
         android:layout_marginStart="0dp"
         android:layout_marginTop="10dp"
-        android:text="Add new activity"
+        android:text="@string/add_new_activity"
         android:textColor="@color/black" />
 
 </LinearLayout>
