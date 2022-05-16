@@ -32,7 +32,7 @@ Firebase Authentication, Realtime Database, Storage
 
 
 
-<img src="./DOCS/firebase.PNG" width="300" height="300">
+<img src="./DOCS/firebase.png" width="300" height="300">
 
 *Firebase data*
 
